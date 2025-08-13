@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="ooops_no_internet_connection">عذرًا، لا يوجد اتصال بالإنترنت</string>
+    <string name="please_check_your_internet_connection_and_try_again">يرجى التحقق من اتصال الإنترنت وحاول مرة أخرى</string>
+    <string name="retry">إعادة المحاولة</string>
+</resources>
