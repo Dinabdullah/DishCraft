@@ -35,6 +35,7 @@ fun HomeScreen(
     modifier: Modifier = Modifier,
     state: States,
     events: (Events) -> Unit,
+    onNavigateToDetails: (String) -> Unit,
 ) {
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -112,7 +113,7 @@ fun HomeScreen(
                                 imageUrl = state.meals[meal].thumbnail ?: "",
                                 title = state.meals[meal].name ?: "",
                                 isFavorite = false,
-                                onCardClick = { /* Handle click */ },
+                                onCardClick = { onNavigateToDetails(state.meals[meal].id ?: "") },
                                 onFavoriteClick = { /* Handle favorite */ }
                             )
                         }

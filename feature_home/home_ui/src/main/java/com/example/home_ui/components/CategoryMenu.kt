@@ -53,7 +53,7 @@ fun CategoryMenu(
         Text(
             text = category.name ?: "",
             color = textColor,
-            fontWeight = FontWeight.Bold,
+            fontWeight = FontWeight.ExtraBold,
             fontFamily = FontFamily(Font(R.font.league_spartan_variable)),
         )
     }
