@@ -5,7 +5,7 @@ import android.content.Intent
 import androidx.core.net.toUri
 
 
-fun openYoutubeLink(context: Context, url: String) {
+fun Context.openYoutubeLink( url: String) {
     val intent = Intent(Intent.ACTION_VIEW, url.toUri())
-    context.startActivity(intent)
+    this.startActivity(intent)
 }

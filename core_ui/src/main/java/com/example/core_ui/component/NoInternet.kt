@@ -66,7 +66,6 @@ fun NoInternet(
                 stringResource(R.string.retry),
                 textAlign = TextAlign.Center,
                 fontWeight = FontWeight.Bold,
-                fontFamily = FontFamily(Font(R.font.league_spartan_variable)),
             )
 
         }

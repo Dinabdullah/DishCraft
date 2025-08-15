@@ -94,7 +94,7 @@ fun SharedTransitionScope.DetailsScreen(
                                 title = states.details.name ?: "",
                                 onYoutubeClick = {
                                     states.details.youtube?.let { url ->
-                                        openYoutubeLink(context, url)
+                                       context.openYoutubeLink(url)
                                     }
                                 },
                                 animatedVisibilityScope = animatedVisibilityScope,

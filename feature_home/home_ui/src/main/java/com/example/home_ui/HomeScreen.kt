@@ -8,17 +8,29 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.DismissibleNavigationDrawer
+import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ModalDrawerSheet
+import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
@@ -28,9 +40,12 @@ import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.example.core_ui.component.MealCard
 import com.example.core_ui.component.NoInternet
 import com.example.home_ui.components.CategoryMenu
+import com.example.home_ui.components.DrawerItem
+import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalSharedTransitionApi::class, ExperimentalMaterial3Api::class)
 @Composable
@@ -41,6 +56,30 @@ fun SharedTransitionScope.HomeScreen(
     onNavigateToDetails: (String) -> Unit,
     animatedVisibilityScope: AnimatedVisibilityScope
 ) {
+    val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
+    val scope = rememberCoroutineScope()
+
+    DismissibleNavigationDrawer(
+        drawerState = drawerState,
+        drawerContent = {
+            ModalDrawerSheet (
+                modifier = Modifier.width(250.dp)
+            ){
+                Text(
+                    text = "Menu",
+                    style = MaterialTheme.typography.titleLarge,
+                    modifier = Modifier.padding(16.dp)
+                )
+                DrawerItem("Home") { scope.launch { drawerState.close() } }
+                DrawerItem("Favorites") { scope.launch { drawerState.close() } }
+                DrawerItem("Profile") { scope.launch { drawerState.close() } }
+                DrawerItem("Settings") { scope.launch { drawerState.close() } }
+                DrawerItem("About Us") { scope.launch { drawerState.close() } }
+            }
+        }
+    ) {
+
+
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         topBar = {
@@ -53,6 +92,14 @@ fun SharedTransitionScope.HomeScreen(
                         ),
                         fontWeight = FontWeight.Bold
                     )
+                },
+                navigationIcon = {
+                    IconButton(onClick = { scope.launch { drawerState.open() } }) {
+                        Icon(
+                            imageVector = Icons.Default.Menu,
+                            contentDescription = "Menu"
+                        )
+                    }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
                     titleContentColor = colorResource(id = com.example.core_ui.R.color.red_pink_main)
@@ -148,7 +195,7 @@ fun SharedTransitionScope.HomeScreen(
             }
         }
 
-    }
+    }}
 }
 
 

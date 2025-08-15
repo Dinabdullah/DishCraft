@@ -58,7 +58,7 @@ fun OnboardingScreenHorizontal(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp),
+            .padding(dimensionResource(id = R.dimen.dp_16)),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         HorizontalPager(
@@ -70,7 +70,7 @@ fun OnboardingScreenHorizontal(
             Column(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(24.dp),
+                    .padding(dimensionResource(id = R.dimen.dp_24)),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.SpaceEvenly
             ) {
@@ -81,13 +81,13 @@ fun OnboardingScreenHorizontal(
                         contentScale = ContentScale.Crop,
                         modifier = Modifier
                             .fillMaxWidth()
-                            .height(300.dp)
-                            .clip(RoundedCornerShape(16.dp))
+                            .height(dimensionResource(id = R.dimen.dp_300))
+                            .clip(RoundedCornerShape(dimensionResource(id = R.dimen.dp_16)))
                     )
                     Box(
                         modifier = Modifier
                             .matchParentSize()
-                            .clip(RoundedCornerShape(16.dp))
+                            .clip(RoundedCornerShape(dimensionResource(id = R.dimen.dp_16)))
                             .background(
                                 Brush.verticalGradient(
                                     colors = listOf(
@@ -104,7 +104,7 @@ fun OnboardingScreenHorizontal(
                         text = stringResource(id = screen.title),
                         fontFamily = FontFamily(Font(R.font.league_spartan_variable)),
                         fontWeight = FontWeight.Bold,
-                        fontSize = 44.sp,
+                        fontSize = dimensionResource(id = R.dimen.sp_44).value.sp,
                         color = colorResource(id = R.color.red_pink_main),
                         style = TextStyle(
                             shadow = Shadow(
@@ -114,13 +114,13 @@ fun OnboardingScreenHorizontal(
                             )
                         )
                     )
-                    Spacer(modifier = Modifier.height(8.dp))
+                    Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.dp_8)))
                     Text(
                         text = stringResource(id = screen.description),
                         fontFamily = FontFamily(Font(R.font.league_spartan_variable)),
                         fontWeight = FontWeight.Bold,
                         lineHeight = dimensionResource(id = R.dimen.sp_32).value.sp,
-                        fontSize = 32.sp,
+                        fontSize = dimensionResource(id = R.dimen.sp_32).value.sp,
                         color = Color.Black,
                         textAlign = TextAlign.Center,
 
@@ -132,15 +132,15 @@ fun OnboardingScreenHorizontal(
         Row(
             horizontalArrangement = Arrangement.Center,
             verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.padding(vertical = 16.dp)
+            modifier = Modifier.padding(vertical = dimensionResource(id = R.dimen.dp_16))
         ) {
             repeat(screens.size) { index ->
                 val color =
                     if (pagerState.currentPage == index) colorResource(id = R.color.red_pink_main) else Color.Gray
                 Box(
                     modifier = Modifier
-                        .size(14.dp)
-                        .padding(4.dp)
+                        .size(dimensionResource(id = R.dimen.dp_14))
+                        .padding(dimensionResource(id = R.dimen.dp_4))
                         .background(color, shape = CircleShape)
                 )
             }
@@ -149,15 +149,15 @@ fun OnboardingScreenHorizontal(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 16.dp)
-                .padding(bottom = 44.dp),
+                .padding(horizontal = dimensionResource(id = R.dimen.dp_16))
+                .padding(bottom = dimensionResource(id = R.dimen.dp_44)),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             TextButton(onClick = { scope.launch { pagerState.scrollToPage(screens.size - 1) } }) {
                 Text(
-                    "Skip",
+                    stringResource(R.string.skip),
                     color = colorResource(id = R.color.red_pink_main),
-                    fontSize = 24.sp,
+                    fontSize = dimensionResource(id = R.dimen.sp_24).value.sp,
                     fontFamily = FontFamily(Font(R.font.league_spartan_variable)),
                     fontWeight = FontWeight.Bold
                 )
