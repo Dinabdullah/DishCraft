@@ -18,4 +18,8 @@ sealed class Routes {
     @Serializable
     data object SignupScreen : Routes()
 
+    @Serializable
+    data object OnboardingScreen : Routes()
+
+
 }

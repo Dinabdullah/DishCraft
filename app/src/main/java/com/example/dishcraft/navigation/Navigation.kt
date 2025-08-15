@@ -13,6 +13,9 @@ import com.example.auth_ui.login.LoginScreen
 import com.example.auth_ui.login.LoginViewModel
 import com.example.auth_ui.signup.SignUpScreen
 import com.example.auth_ui.signup.SignUpViewModel
+import com.example.core_ui.onboarding.OnboardingComponent
+import com.example.core_ui.onboarding.OnboardingScreen
+import com.example.core_ui.onboarding.OnboardingViewModel
 import com.example.details_ui.DetailsScreen
 import com.example.details_ui.DetailsScreenViewModel
 import com.example.details_ui.Events
@@ -25,7 +28,7 @@ fun AppNavHost() {
 
     NavHost(
         navController = navController,
-        startDestination = Routes.LoginScreen
+        startDestination = Routes.OnboardingScreen
     ) {
         composable<Routes.Home> {
             val viewModel: HomeScreenViewModel = hiltViewModel()
@@ -76,14 +79,33 @@ fun AppNavHost() {
             val state by viewModel.uiState.collectAsState()
             SignUpScreen(
                 onLoginClicked = {
-                    navController.navigate(Routes.LoginScreen){
-                    popUpTo(Routes.LoginScreen) {
-                        inclusive = false
-                    }}
+                    navController.navigate(Routes.LoginScreen)
                 },
                 states = state,
                 events = viewModel::onEvent
             )
+        }
+        composable<Routes.OnboardingScreen> {
+            val viewModel: OnboardingViewModel = hiltViewModel()
+            val state by viewModel.currentPage.collectAsState()
+            OnboardingScreen(
+                screens = listOf(
+                    OnboardingComponent.Screen1,
+                    OnboardingComponent.Screen2,
+                    OnboardingComponent.Screen3
+                ),
+                currentPage = state,
+                onNext = { viewModel.onNext(3) },
+                onSkip = { viewModel.onSkip(3) },
+                onFinish = {
+                    navController.navigate(Routes.LoginScreen) {
+                        popUpTo(Routes.OnboardingScreen) {
+                            inclusive = true
+                        }
+                    }
+                }
+            )
+
         }
 
     }

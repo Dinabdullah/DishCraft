@@ -20,6 +20,7 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import com.example.core_ui.R
@@ -54,10 +55,11 @@ fun CustomButton(
         } else {
             Text(
                 text = text,
+                textAlign = TextAlign.Center,
                 color = Color.White,
                 fontSize = dimensionResource(id = R.dimen.sp_24).value.sp,
                 fontFamily = FontFamily(Font(R.font.league_spartan_variable)),
-                fontWeight = FontWeight.Bold
+                fontWeight = FontWeight.ExtraBold
             )
         }
     }
