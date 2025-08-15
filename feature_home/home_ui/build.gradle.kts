@@ -51,6 +51,7 @@ dependencies {
 
     implementation(libs.hilt)            
     ksp(libs.hilt.compiler)
+    implementation("com.google.accompanist:accompanist-navigation-animation:0.36.0")
 
 
 }

@@ -1,5 +1,8 @@
 package com.example.home_ui
 
+import androidx.compose.animation.AnimatedVisibilityScope
+import androidx.compose.animation.ExperimentalSharedTransitionApi
+import androidx.compose.animation.SharedTransitionScope
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -29,13 +32,14 @@ import com.example.core_ui.component.MealCard
 import com.example.core_ui.component.NoInternet
 import com.example.home_ui.components.CategoryMenu
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalSharedTransitionApi::class, ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreen(
+fun SharedTransitionScope.HomeScreen(
     modifier: Modifier = Modifier,
     state: States,
     events: (Events) -> Unit,
     onNavigateToDetails: (String) -> Unit,
+    animatedVisibilityScope: AnimatedVisibilityScope
 ) {
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -113,8 +117,10 @@ fun HomeScreen(
                                 imageUrl = state.meals[meal].thumbnail ?: "",
                                 title = state.meals[meal].name ?: "",
                                 isFavorite = false,
+                                mealId = state.meals[meal].id ?: "",
                                 onCardClick = { onNavigateToDetails(state.meals[meal].id ?: "") },
-                                onFavoriteClick = { /* Handle favorite */ }
+                                onFavoriteClick = { /* Handle favorite */ },
+                                animatedVisibilityScope = animatedVisibilityScope,
                             )
                         }
                     }
@@ -129,12 +135,14 @@ fun HomeScreen(
                 items(state.list.size) { index ->
                     val meal = state.list[index]
                     MealCard(
-                        modifier = Modifier.padding(it),
+                        modifier = Modifier.padding(dimensionResource(id = com.example.core_ui.R.dimen.dp_8)),
                         imageUrl = meal.thumbnail ?: "",
                         title = meal.name ?: "",
                         isFavorite = false,
                         onCardClick = {},
                         onFavoriteClick = {},
+                        mealId = meal.id ?: "",
+                        animatedVisibilityScope = animatedVisibilityScope
                     )
                 }
             }

@@ -1,5 +1,8 @@
 package com.example.core_ui.component
 
+import androidx.compose.animation.AnimatedVisibilityScope
+import androidx.compose.animation.ExperimentalSharedTransitionApi
+import androidx.compose.animation.SharedTransitionScope
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -28,19 +31,21 @@ import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.example.core_ui.R
 
+@OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
-fun MealCard(
+fun SharedTransitionScope.MealCard(
     modifier: Modifier = Modifier,
     imageUrl: String,
     title: String,
+    mealId: String,
     isFavorite: Boolean,
     onCardClick: () -> Unit,
     onFavoriteClick: () -> Unit,
+    animatedVisibilityScope: AnimatedVisibilityScope
 ) {
     Card(
         shape = RoundedCornerShape(dimensionResource(id = R.dimen.dp_16)),
@@ -56,6 +61,10 @@ fun MealCard(
                     model = imageUrl,
                     contentDescription = title,
                     modifier = Modifier
+                        .sharedElement(
+                            state = rememberSharedContentState(key ="image_$mealId"),
+                            animatedVisibilityScope = animatedVisibilityScope,
+                        )
                         .fillMaxWidth()
                         .height(dimensionResource(id = R.dimen.dp_170))
                         .clip(
@@ -93,7 +102,11 @@ fun MealCard(
                     color = Color.Black,
                     maxLines = 2,
                     overflow = TextOverflow.Ellipsis,
-                    lineHeight = dimensionResource(id = R.dimen.sp_26).value.sp
+                    lineHeight = dimensionResource(id = R.dimen.sp_26).value.sp,
+                    modifier = modifier .sharedElement(
+                        state = rememberSharedContentState(key ="title_$mealId"),
+                        animatedVisibilityScope = animatedVisibilityScope,
+                    )
                 )
                 Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.dp_4)))
             }
@@ -102,14 +115,14 @@ fun MealCard(
 }
 
 
-@Preview
-@Composable
-private fun CategoryBoxdpre() {
-    MealCard(
-        imageUrl = R.drawable.meat.toString(),
-        title = "Pasta",
-        isFavorite = false,
-        onCardClick = {},
-        onFavoriteClick = {}
-    )
-}
+//@Preview
+//@Composable
+//private fun CategoryBoxdpre() {
+//    MealCard(
+//        imageUrl = R.drawable.meat.toString(),
+//        title = "Pasta",
+//        isFavorite = false,
+//        onCardClick = {},
+//        onFavoriteClick = {}
+//    )
+//}

@@ -1,5 +1,8 @@
 package com.example.details_ui
 
+import androidx.compose.animation.AnimatedVisibilityScope
+import androidx.compose.animation.ExperimentalSharedTransitionApi
+import androidx.compose.animation.SharedTransitionScope
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -29,13 +32,14 @@ import com.example.details_ui.components.DetailsCard
 import com.example.details_ui.components.InfoItem
 import com.example.details_ui.utills.openYoutubeLink
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalSharedTransitionApi::class)
 @Composable
-fun DetailsScreen(
+fun SharedTransitionScope.DetailsScreen(
     modifier: Modifier = Modifier,
     states: States,
     events: (Events) -> Unit,
-    id: String
+    id: String,
+    animatedVisibilityScope: AnimatedVisibilityScope
 ) {
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -92,7 +96,10 @@ fun DetailsScreen(
                                     states.details.youtube?.let { url ->
                                         openYoutubeLink(context, url)
                                     }
-                                }
+                                },
+                                animatedVisibilityScope = animatedVisibilityScope,
+                                mealId = states.details.id ?: ""
+
                             )
                         }
                     }

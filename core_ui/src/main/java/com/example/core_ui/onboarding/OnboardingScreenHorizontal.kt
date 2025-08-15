@@ -25,12 +25,17 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -69,15 +74,30 @@ fun OnboardingScreenHorizontal(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.SpaceEvenly
             ) {
-                Image(
-                    painter = painterResource(id = screen.imageRes),
-                    contentDescription = null,
-                    contentScale = ContentScale.Crop,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(300.dp)
-                        .clip(RoundedCornerShape(16.dp))
-                )
+                Box {
+                    Image(
+                        painter = painterResource(id = screen.imageRes),
+                        contentDescription = null,
+                        contentScale = ContentScale.Crop,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(300.dp)
+                            .clip(RoundedCornerShape(16.dp))
+                    )
+                    Box(
+                        modifier = Modifier
+                            .matchParentSize()
+                            .clip(RoundedCornerShape(16.dp))
+                            .background(
+                                Brush.verticalGradient(
+                                    colors = listOf(
+                                        Color.Black.copy(alpha = 0.3f),
+                                        colorResource(id = R.color.red_pink_main).copy(alpha = 0.3f)
+                                    )
+                                )
+                            )
+                    )
+                }
 
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
                     Text(
@@ -85,7 +105,14 @@ fun OnboardingScreenHorizontal(
                         fontFamily = FontFamily(Font(R.font.league_spartan_variable)),
                         fontWeight = FontWeight.Bold,
                         fontSize = 44.sp,
-                        color = colorResource(id = R.color.red_pink_main)
+                        color = colorResource(id = R.color.red_pink_main),
+                        style = TextStyle(
+                            shadow = Shadow(
+                                color = Color.Gray,
+                                offset = Offset(4f, 4f),
+                                blurRadius = 8f
+                            )
+                        )
                     )
                     Spacer(modifier = Modifier.height(8.dp))
                     Text(
@@ -95,7 +122,8 @@ fun OnboardingScreenHorizontal(
                         lineHeight = dimensionResource(id = R.dimen.sp_32).value.sp,
                         fontSize = 32.sp,
                         color = Color.Black,
-                        textAlign = TextAlign.Center
+                        textAlign = TextAlign.Center,
+
                     )
                 }
             }

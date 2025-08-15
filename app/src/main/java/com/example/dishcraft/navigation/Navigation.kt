@@ -1,5 +1,7 @@
 package com.example.dishcraft.navigation
 
+import androidx.compose.animation.ExperimentalSharedTransitionApi
+import androidx.compose.animation.SharedTransitionLayout
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -22,84 +24,88 @@ import com.example.details_ui.Events
 import com.example.home_ui.HomeScreen
 import com.example.home_ui.HomeScreenViewModel
 
+@OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
 fun AppNavHost() {
     val navController = rememberNavController()
-
-    NavHost(
-        navController = navController,
-        startDestination = Routes.OnboardingScreen
-    ) {
-        composable<Routes.Home> {
-            val viewModel: HomeScreenViewModel = hiltViewModel()
-            val state by viewModel.uiState.collectAsState()
-            HomeScreen(
-                state = state,
-                events = viewModel::onEvent,
-                onNavigateToDetails = { id ->
-                    navController.navigate(Routes.DetailsScreen(id))
-                }
-            )
-        }
-        composable<Routes.DetailsScreen> { backStackEntry ->
-            val details = backStackEntry.toRoute<Routes.DetailsScreen>()
-            val viewModel: DetailsScreenViewModel = hiltViewModel()
-            val state by viewModel.uiState.collectAsState()
-
-            LaunchedEffect(Unit) {
-                viewModel.onEvent(Events.FetchMeal(details.id))
+    SharedTransitionLayout {
+        NavHost(
+            navController = navController,
+            startDestination = Routes.OnboardingScreen
+        ) {
+            composable<Routes.Home> {
+                val viewModel: HomeScreenViewModel = hiltViewModel()
+                val state by viewModel.uiState.collectAsState()
+                HomeScreen(
+                    state = state,
+                    events = viewModel::onEvent,
+                    onNavigateToDetails = { id ->
+                        navController.navigate(Routes.DetailsScreen(id))
+                    },
+                    animatedVisibilityScope = this
+                )
             }
-            DetailsScreen(
-                states = state,
-                events = viewModel::onEvent,
-                id = details.id
-            )
+            composable<Routes.DetailsScreen> { backStackEntry ->
+                val details = backStackEntry.toRoute<Routes.DetailsScreen>()
+                val viewModel: DetailsScreenViewModel = hiltViewModel()
+                val state by viewModel.uiState.collectAsState()
 
-        }
-        composable<Routes.LoginScreen> {
-            val viewModel: LoginViewModel = hiltViewModel()
-            val state by viewModel.uiState.collectAsState()
-            LoginScreen(
-                onSignUpClicked = {
-                    navController.navigate(Routes.SignupScreen)
-                },
-                states = state,
-                events = viewModel::onEvent,
-                onHomeClicked = {
-                    navController.navigate(Routes.Home) {
-                        popUpTo(Routes.LoginScreen) {
-                            inclusive = false
+                LaunchedEffect(Unit) {
+                    viewModel.onEvent(Events.FetchMeal(details.id))
+                }
+                DetailsScreen(
+                    states = state,
+                    events = viewModel::onEvent,
+                    id = details.id,
+                    animatedVisibilityScope = this
+                )
+
+            }
+            composable<Routes.LoginScreen> {
+                val viewModel: LoginViewModel = hiltViewModel()
+                val state by viewModel.uiState.collectAsState()
+                LoginScreen(
+                    onSignUpClicked = {
+                        navController.navigate(Routes.SignupScreen)
+                    },
+                    states = state,
+                    events = viewModel::onEvent,
+                    onHomeClicked = {
+                        navController.navigate(Routes.Home) {
+                            popUpTo(Routes.LoginScreen) {
+                                inclusive = false
+                            }
                         }
                     }
-                }
-            )
-        }
-        composable<Routes.SignupScreen> {
-            val viewModel: SignUpViewModel = hiltViewModel()
-            val state by viewModel.uiState.collectAsState()
-            SignUpScreen(
-                onLoginClicked = {
-                    navController.navigate(Routes.LoginScreen)
-                },
-                states = state,
-                events = viewModel::onEvent
-            )
-        }
-        composable<Routes.OnboardingScreen> {
-            val viewModel: OnboardingViewModel = hiltViewModel()
-            val state by viewModel.currentPage.collectAsState()
-            OnboardingScreenHorizontal(
-                screens = listOf(
-                    OnboardingComponent.Screen1,
-                    OnboardingComponent.Screen2,
-                    OnboardingComponent.Screen3
-                ),
-                onFinish = {
-                    navController.navigate(Routes.LoginScreen)
-                }
-            )
+                )
+            }
+            composable<Routes.SignupScreen> {
+                val viewModel: SignUpViewModel = hiltViewModel()
+                val state by viewModel.uiState.collectAsState()
+                SignUpScreen(
+                    onLoginClicked = {
+                        navController.navigate(Routes.LoginScreen)
+                    },
+                    states = state,
+                    events = viewModel::onEvent
+                )
+            }
+            composable<Routes.OnboardingScreen> {
+                val viewModel: OnboardingViewModel = hiltViewModel()
+                val state by viewModel.currentPage.collectAsState()
+                OnboardingScreenHorizontal(
+                    screens = listOf(
+                        OnboardingComponent.Screen1,
+                        OnboardingComponent.Screen2,
+                        OnboardingComponent.Screen3
+                    ),
+                    onFinish = {
+                        navController.navigate(Routes.LoginScreen)
+                    }
+                )
+
+            }
 
         }
-
     }
 }

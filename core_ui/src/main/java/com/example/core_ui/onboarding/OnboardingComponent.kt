@@ -6,19 +6,19 @@ sealed class OnboardingComponent(val title: Int, val description: Int, val image
     object Screen1 : OnboardingComponent(
         title = R.string.master,
         description = R.string.the_art_of_cooking,
-        imageRes = R.drawable.cooking_
+        imageRes = R.drawable.img1
 
     )
 
     object Screen2 : OnboardingComponent(
         title = R.string.craft,
         description = R.string.your_perfect_dish,
-        imageRes = R.drawable.cooking
+        imageRes = R.drawable.img2
     )
 
     object Screen3 : OnboardingComponent(
         title = R.string.from,
         description = R.string.ingredients_to_masterpieces,
-        imageRes = R.drawable.love
+        imageRes = R.drawable.img3
     )
 }

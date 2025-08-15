@@ -70,7 +70,7 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
     implementation(platform(libs.firebase.bom))
     implementation("com.google.firebase:firebase-auth-ktx")
-
+    implementation("com.google.accompanist:accompanist-navigation-animation:0.36.0")
 
 
 }

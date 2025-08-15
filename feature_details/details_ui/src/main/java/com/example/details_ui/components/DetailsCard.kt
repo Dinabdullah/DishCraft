@@ -1,5 +1,8 @@
 package com.example.details_ui.components
 
+import androidx.compose.animation.AnimatedVisibilityScope
+import androidx.compose.animation.ExperimentalSharedTransitionApi
+import androidx.compose.animation.SharedTransitionScope
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -10,7 +13,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.Text
@@ -23,19 +25,20 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.example.core_ui.R
-import com.example.details_domain.DetailsDomainModel
 
+@OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
-fun DetailsCard(
+fun SharedTransitionScope.DetailsCard(
     modifier: Modifier = Modifier,
     imageUrl: String,
+    mealId: String,
     title: String,
     onYoutubeClick: () -> Unit,
+    animatedVisibilityScope: AnimatedVisibilityScope
 ) {
     Card(
         shape = RoundedCornerShape(dimensionResource(id = R.dimen.dp_16)),
@@ -49,6 +52,10 @@ fun DetailsCard(
                     model = imageUrl,
                     contentDescription = null,
                     modifier = Modifier
+                        .sharedElement(
+                            state = rememberSharedContentState(key = "image_$mealId"),
+                            animatedVisibilityScope = animatedVisibilityScope,
+                        )
                         .fillMaxWidth()
                         .height(dimensionResource(id = R.dimen.dp_170))
                         .clip(
@@ -75,12 +82,17 @@ fun DetailsCard(
                     fontWeight = FontWeight.ExtraBold,
                     fontSize = dimensionResource(id = R.dimen.sp_24).value.sp,
                     color = Color.Black,
-                    lineHeight = dimensionResource(id = R.dimen.sp_26).value.sp
+                    lineHeight = dimensionResource(id = R.dimen.sp_26).value.sp,
+                    modifier = modifier.sharedElement(
+                        state = rememberSharedContentState(key = "title_$mealId"),
+                        animatedVisibilityScope = animatedVisibilityScope,
+                    )
                 )
                 Image(
                     painter = painterResource(id = R.drawable.youtube_logo),
                     contentDescription = null,
-                    modifier = Modifier.size(dimensionResource(id = R.dimen.dp_44))
+                    modifier = Modifier
+                        .size(dimensionResource(id = R.dimen.dp_44))
                         .clickable { onYoutubeClick() }
                 )
             }
