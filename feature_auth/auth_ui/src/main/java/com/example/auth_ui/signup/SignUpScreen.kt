@@ -11,11 +11,14 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -45,11 +48,19 @@ fun SignUpScreen(
         )
 
         Text(
-            "SIGNUP",
+            "SIGN \n     UP",
             color = Color.Black,
             fontSize = dimensionResource(id = com.example.core_ui.R.dimen.sp_44).value.sp,
             fontWeight = FontWeight.ExtraBold,
+            lineHeight = dimensionResource(id = com.example.core_ui.R.dimen.sp_44).value.sp,
             fontFamily = FontFamily(Font(com.example.core_ui.R.font.league_spartan_variable)),
+            style = TextStyle(
+                shadow = Shadow(
+                    color = Color.Gray,
+                    offset = Offset(4f, 4f),
+                    blurRadius = 8f
+                )
+            )
         )
 
         CustomTextField(
