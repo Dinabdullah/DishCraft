@@ -9,6 +9,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
+import com.example.auth_ui.login.LoginScreen
+import com.example.auth_ui.login.LoginViewModel
+import com.example.auth_ui.signup.SignUpScreen
+import com.example.auth_ui.signup.SignUpViewModel
 import com.example.details_ui.DetailsScreen
 import com.example.details_ui.DetailsScreenViewModel
 import com.example.details_ui.Events
@@ -21,7 +25,7 @@ fun AppNavHost() {
 
     NavHost(
         navController = navController,
-        startDestination = Routes.Home
+        startDestination = Routes.LoginScreen
     ) {
         composable<Routes.Home> {
             val viewModel: HomeScreenViewModel = hiltViewModel()
@@ -49,5 +53,38 @@ fun AppNavHost() {
             )
 
         }
+        composable<Routes.LoginScreen> {
+            val viewModel: LoginViewModel = hiltViewModel()
+            val state by viewModel.uiState.collectAsState()
+            LoginScreen(
+                onSignUpClicked = {
+                    navController.navigate(Routes.SignupScreen)
+                },
+                states = state,
+                events = viewModel::onEvent,
+                onHomeClicked = {
+                    navController.navigate(Routes.Home) {
+                        popUpTo(Routes.LoginScreen) {
+                            inclusive = false
+                        }
+                    }
+                }
+            )
+        }
+        composable<Routes.SignupScreen> {
+            val viewModel: SignUpViewModel = hiltViewModel()
+            val state by viewModel.uiState.collectAsState()
+            SignUpScreen(
+                onLoginClicked = {
+                    navController.navigate(Routes.LoginScreen){
+                    popUpTo(Routes.LoginScreen) {
+                        inclusive = false
+                    }}
+                },
+                states = state,
+                events = viewModel::onEvent
+            )
+        }
+
     }
 }

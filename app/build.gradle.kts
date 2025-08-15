@@ -5,7 +5,7 @@ plugins {
     alias(libs.plugins.ksp)
     alias(libs.plugins.hilt)
     kotlin("plugin.serialization") version "2.2.0"
-}
+    id("com.google.gms.google-services")}
 
 android {
     namespace = "com.example.dishcraft"
@@ -41,7 +41,6 @@ android {
         compose = true
     }
 }
-
 dependencies {
 
     implementation(libs.androidx.core.ktx)
@@ -67,7 +66,10 @@ dependencies {
     implementation(project(":core_ui"))
     implementation(project(":feature_home:home_ui"))
     implementation(project(":feature_details:details_ui"))
+    implementation(project(":feature_auth:auth_ui"))
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
+    implementation(platform(libs.firebase.bom))
+    implementation("com.google.firebase:firebase-auth-ktx")
 
 
 

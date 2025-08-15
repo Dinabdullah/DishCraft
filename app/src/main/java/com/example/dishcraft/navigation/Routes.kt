@@ -12,10 +12,10 @@ sealed class Routes {
 //    @Serializable
 //    data object FavouritesScreen : Routes()
 //
-//    @Serializable
-//    data object LoginScreen : Routes()
-//
-//    @Serializable
-//    data object SignupScreen : Routes()
+    @Serializable
+    data object LoginScreen : Routes()
+
+    @Serializable
+    data object SignupScreen : Routes()
 
 }
