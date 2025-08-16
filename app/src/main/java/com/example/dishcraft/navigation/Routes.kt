@@ -13,7 +13,7 @@ sealed class Routes {
     @Serializable
     data class DetailsScreen(val id: String) : Routes()
 
-//    @Serializable
+    //    @Serializable
 //    data object FavouritesScreen : Routes()
 //
     @Serializable
@@ -24,6 +24,9 @@ sealed class Routes {
 
     @Serializable
     data object OnboardingScreen : Routes()
+
+    @Serializable
+    data object SettingsScreen : Routes()
 
 
 }

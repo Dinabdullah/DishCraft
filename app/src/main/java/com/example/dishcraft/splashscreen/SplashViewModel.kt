@@ -1,4 +1,4 @@
-package com.example.dishcraft
+package com.example.dishcraft.splashscreen
 
 import androidx.lifecycle.ViewModel
 import com.example.sharedpreferences.sharedpreferences.UserPreferences

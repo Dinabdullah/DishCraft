@@ -21,9 +21,10 @@ import com.example.core_ui.onboarding.OnboardingViewModel
 import com.example.details_ui.DetailsScreen
 import com.example.details_ui.DetailsScreenViewModel
 import com.example.details_ui.Events
-import com.example.dishcraft.SplashScreen
+import com.example.dishcraft.splashscreen.SplashScreen
 import com.example.home_ui.HomeScreen
 import com.example.home_ui.HomeScreenViewModel
+import com.example.home_ui.SettingScreen
 
 @OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
@@ -62,6 +63,9 @@ fun AppNavHost() {
                     events = viewModel::onEvent,
                     onNavigateToDetails = { id ->
                         navController.navigate(Routes.DetailsScreen(id))
+                    },
+                    onNavigateToSetting = {
+                        navController.navigate(Routes.SettingsScreen)
                     },
                     animatedVisibilityScope = this
                 )
@@ -125,6 +129,9 @@ fun AppNavHost() {
                     }
                 )
 
+            }
+            composable<Routes.SettingsScreen> {
+                SettingScreen()
             }
 
         }

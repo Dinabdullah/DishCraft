@@ -23,7 +23,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalDrawerSheet
-import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -35,6 +34,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
@@ -54,6 +54,7 @@ fun SharedTransitionScope.HomeScreen(
     state: States,
     events: (Events) -> Unit,
     onNavigateToDetails: (String) -> Unit,
+    onNavigateToSetting: () -> Unit,
     animatedVisibilityScope: AnimatedVisibilityScope
 ) {
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
@@ -62,140 +63,150 @@ fun SharedTransitionScope.HomeScreen(
     DismissibleNavigationDrawer(
         drawerState = drawerState,
         drawerContent = {
-            ModalDrawerSheet (
+            ModalDrawerSheet(
                 modifier = Modifier.width(250.dp)
-            ){
+            ) {
                 Text(
                     text = "Menu",
                     style = MaterialTheme.typography.titleLarge,
                     modifier = Modifier.padding(16.dp)
                 )
-                DrawerItem("Home") { scope.launch { drawerState.close() } }
-                DrawerItem("Favorites") { scope.launch { drawerState.close() } }
-                DrawerItem("Profile") { scope.launch { drawerState.close() } }
-                DrawerItem("Settings") { scope.launch { drawerState.close() } }
-                DrawerItem("About Us") { scope.launch { drawerState.close() } }
+                DrawerItem("Home", icon = painterResource(com.example.core_ui.R.drawable.baseline_home_24)) { scope.launch { drawerState.close() } }
+                DrawerItem("Favorites",icon = painterResource(com.example.core_ui.R.drawable.baseline_favorite_24)) { scope.launch { drawerState.close() } }
+                DrawerItem("Profile",icon = painterResource(com.example.core_ui.R.drawable.baseline_person_24)) { scope.launch { drawerState.close() } }
+                DrawerItem("Settings",icon = painterResource(com.example.core_ui.R.drawable.baseline_settings_24)) {
+                    scope.launch {
+                        onNavigateToSetting()
+                        drawerState.close()
+                    }
+                }
+                DrawerItem("About Us",icon = painterResource(com.example.core_ui.R.drawable.baseline_error_outline_24)) { scope.launch { drawerState.close() } }
             }
         }
     ) {
 
 
-    Scaffold(
-        modifier = Modifier.fillMaxSize(),
-        topBar = {
-            TopAppBar(
-                title = {
-                    Text(
-                        text = stringResource(R.string.what_are_you_hungry_for_today),
-                        fontFamily = FontFamily(
-                            Font(com.example.core_ui.R.font.league_spartan_variable)
-                        ),
-                        fontWeight = FontWeight.Bold
-                    )
-                },
-                navigationIcon = {
-                    IconButton(onClick = { scope.launch { drawerState.open() } }) {
-                        Icon(
-                            imageVector = Icons.Default.Menu,
-                            contentDescription = "Menu"
+        Scaffold(
+            modifier = Modifier.fillMaxSize(),
+            topBar = {
+                TopAppBar(
+                    title = {
+                        Text(
+                            text = stringResource(R.string.what_are_you_hungry_for_today),
+                            fontFamily = FontFamily(
+                                Font(com.example.core_ui.R.font.league_spartan_variable)
+                            ),
+                            fontWeight = FontWeight.Bold
                         )
-                    }
-                },
-                colors = TopAppBarDefaults.topAppBarColors(
-                    titleContentColor = colorResource(id = com.example.core_ui.R.color.red_pink_main)
+                    },
+                    navigationIcon = {
+                        IconButton(onClick = { scope.launch { drawerState.open() } }) {
+                            Icon(
+                                imageVector = Icons.Default.Menu,
+                                contentDescription = "Menu"
+                            )
+                        }
+                    },
+                    colors = TopAppBarDefaults.topAppBarColors(
+                        titleContentColor = colorResource(id = com.example.core_ui.R.color.red_pink_main)
+                    )
                 )
-            )
-        },
-        bottomBar = {
+            },
+            bottomBar = {
 //            BottomBar(
 //                homeClicked = {},
 //                searchClicked = {},
 //                watchListClicked = {}
 //            )
-        },
-        //containerColor = Color.Black,
-    ) {
-        when (state) {
-            is States.IsLoading -> {
-                Box(modifier = modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                    CircularProgressIndicator()
-                }
-            }
-
-            is States.IsOffline -> {
-                NoInternet(onRetry = {
-                    events(Events.FetchCategories)
-                })
-            }
-
-            is States.HomeContent -> {
-                Column(
-                    modifier = modifier
-                        .fillMaxSize()
-                        .padding(it)
-                ) {
-                    LazyRow(modifier = Modifier.padding(vertical = dimensionResource(id = com.example.core_ui.R.dimen.dp_8))) {
-                        items(state.categories.size) { category ->
-                            val isSelected =
-                                state.categories[category].name == state.selectedCategoryName
-                            CategoryMenu(
-                                category = state.categories[category],
-                                isSelected = isSelected,  // لازم تضيفي هذا في CategoryMenu عشان تبرزي المحدد
-                                onCategoryClick = {
-                                    if (!isSelected) {
-                                        events(
-                                            Events.FetchMeals(
-                                                state.categories[category].name ?: ""
-                                            )
-                                        )
-                                    }
-                                }
-                            )
-                        }
+            },
+            //containerColor = Color.Black,
+        ) {
+            when (state) {
+                is States.IsLoading -> {
+                    Box(modifier = modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                        CircularProgressIndicator()
                     }
+                }
 
-                    LazyVerticalGrid(
-                        columns = GridCells.Fixed(2),
-                        contentPadding = PaddingValues(dimensionResource(id = com.example.core_ui.R.dimen.dp_12)),
-                        modifier = Modifier.fillMaxSize()
+                is States.IsOffline -> {
+                    NoInternet(onRetry = {
+                        events(Events.FetchCategories)
+                    })
+                }
+
+                is States.HomeContent -> {
+                    Column(
+                        modifier = modifier
+                            .fillMaxSize()
+                            .padding(it)
                     ) {
-                        items(state.meals.size) { meal ->
-                            MealCard(
-                                imageUrl = state.meals[meal].thumbnail ?: "",
-                                title = state.meals[meal].name ?: "",
-                                isFavorite = false,
-                                mealId = state.meals[meal].id ?: "",
-                                onCardClick = { onNavigateToDetails(state.meals[meal].id ?: "") },
-                                onFavoriteClick = { /* Handle favorite */ },
-                                animatedVisibilityScope = animatedVisibilityScope,
-                            )
+                        LazyRow(modifier = Modifier.padding(vertical = dimensionResource(id = com.example.core_ui.R.dimen.dp_8))) {
+                            items(state.categories.size) { category ->
+                                val isSelected =
+                                    state.categories[category].name == state.selectedCategoryName
+                                CategoryMenu(
+                                    category = state.categories[category],
+                                    isSelected = isSelected,  // لازم تضيفي هذا في CategoryMenu عشان تبرزي المحدد
+                                    onCategoryClick = {
+                                        if (!isSelected) {
+                                            events(
+                                                Events.FetchMeals(
+                                                    state.categories[category].name ?: ""
+                                                )
+                                            )
+                                        }
+                                    }
+                                )
+                            }
                         }
+
+                        LazyVerticalGrid(
+                            columns = GridCells.Fixed(2),
+                            contentPadding = PaddingValues(dimensionResource(id = com.example.core_ui.R.dimen.dp_12)),
+                            modifier = Modifier.fillMaxSize()
+                        ) {
+                            items(state.meals.size) { meal ->
+                                MealCard(
+                                    imageUrl = state.meals[meal].thumbnail ?: "",
+                                    title = state.meals[meal].name ?: "",
+                                    isFavorite = false,
+                                    mealId = state.meals[meal].id ?: "",
+                                    onCardClick = {
+                                        onNavigateToDetails(
+                                            state.meals[meal].id ?: ""
+                                        )
+                                    },
+                                    onFavoriteClick = { /* Handle favorite */ },
+                                    animatedVisibilityScope = animatedVisibilityScope,
+                                )
+                            }
+                        }
+                    }
+                }
+
+                is States.MealFetched -> LazyVerticalGrid(
+                    columns = GridCells.Fixed(2),
+                    state = rememberLazyGridState(),
+                    contentPadding = PaddingValues(dimensionResource(id = com.example.core_ui.R.dimen.dp_12))
+                ) {
+                    items(state.list.size) { index ->
+                        val meal = state.list[index]
+                        MealCard(
+                            modifier = Modifier.padding(dimensionResource(id = com.example.core_ui.R.dimen.dp_8)),
+                            imageUrl = meal.thumbnail ?: "",
+                            title = meal.name ?: "",
+                            isFavorite = false,
+                            onCardClick = {},
+                            onFavoriteClick = {},
+                            mealId = meal.id ?: "",
+                            animatedVisibilityScope = animatedVisibilityScope
+                        )
                     }
                 }
             }
 
-            is States.MealFetched -> LazyVerticalGrid(
-                columns = GridCells.Fixed(2),
-                state = rememberLazyGridState(),
-                contentPadding = PaddingValues(dimensionResource(id = com.example.core_ui.R.dimen.dp_12))
-            ) {
-                items(state.list.size) { index ->
-                    val meal = state.list[index]
-                    MealCard(
-                        modifier = Modifier.padding(dimensionResource(id = com.example.core_ui.R.dimen.dp_8)),
-                        imageUrl = meal.thumbnail ?: "",
-                        title = meal.name ?: "",
-                        isFavorite = false,
-                        onCardClick = {},
-                        onFavoriteClick = {},
-                        mealId = meal.id ?: "",
-                        animatedVisibilityScope = animatedVisibilityScope
-                    )
-                }
-            }
         }
-
-    }}
+    }
 }
 
 
