@@ -21,6 +21,7 @@ import com.example.core_ui.onboarding.OnboardingViewModel
 import com.example.details_ui.DetailsScreen
 import com.example.details_ui.DetailsScreenViewModel
 import com.example.details_ui.Events
+import com.example.dishcraft.SplashScreen
 import com.example.home_ui.HomeScreen
 import com.example.home_ui.HomeScreenViewModel
 
@@ -31,8 +32,15 @@ fun AppNavHost() {
     SharedTransitionLayout {
         NavHost(
             navController = navController,
-            startDestination = Routes.OnboardingScreen
+            startDestination = Routes.SplashScreen
         ) {
+            composable<Routes.SplashScreen> {
+                SplashScreen {
+                    navController.navigate(Routes.OnboardingScreen) {
+                        popUpTo(Routes.SplashScreen) { inclusive = true }
+                    }
+                }
+            }
             composable<Routes.Home> {
                 val viewModel: HomeScreenViewModel = hiltViewModel()
                 val state by viewModel.uiState.collectAsState()
