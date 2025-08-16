@@ -2,7 +2,7 @@ package com.example.dishcraft
 
 import android.app.Application
 import android.content.Context
-import com.example.home_ui.LocaleManager
+import com.example.core_ui.LocaleManager
 import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp

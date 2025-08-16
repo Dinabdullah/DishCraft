@@ -6,7 +6,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import com.example.dishcraft.navigation.AppNavHost
 import com.example.dishcraft.ui.theme.DishCraftTheme
-import com.example.home_ui.LocaleManager
+import com.example.core_ui.LocaleManager
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

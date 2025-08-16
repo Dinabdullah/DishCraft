@@ -18,13 +18,14 @@ import com.example.auth_ui.signup.SignUpViewModel
 import com.example.core_ui.onboarding.OnboardingComponent
 import com.example.core_ui.onboarding.OnboardingScreenHorizontal
 import com.example.core_ui.onboarding.OnboardingViewModel
+import com.example.core_ui.settings.SettingScreen
+import com.example.core_ui.settings.SettingsViewModel
 import com.example.details_ui.DetailsScreen
 import com.example.details_ui.DetailsScreenViewModel
 import com.example.details_ui.Events
 import com.example.dishcraft.splashscreen.SplashScreen
 import com.example.home_ui.HomeScreen
 import com.example.home_ui.HomeScreenViewModel
-import com.example.home_ui.SettingScreen
 
 @OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
@@ -131,7 +132,15 @@ fun AppNavHost() {
 
             }
             composable<Routes.SettingsScreen> {
-                SettingScreen()
+                val viewModel:SettingsViewModel =hiltViewModel()
+                SettingScreen(
+                    onLogoutConfirmed = {
+                        viewModel.logout()
+                        navController.navigate(Routes.LoginScreen) {
+                            popUpTo(Routes.Home) { inclusive = true }
+                        }
+                    }
+                )
             }
 
         }

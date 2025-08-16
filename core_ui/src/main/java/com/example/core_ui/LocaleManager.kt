@@ -1,4 +1,4 @@
-package com.example.home_ui
+package com.example.core_ui
 
 import android.content.Context
 import android.content.res.Configuration
