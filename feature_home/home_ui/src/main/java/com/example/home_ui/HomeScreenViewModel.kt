@@ -1,5 +1,6 @@
 package com.example.home_ui
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.home_domain.usecase.categories.IGetCategoriesUseCase
@@ -35,6 +36,7 @@ class HomeScreenViewModel @Inject constructor(
             _uiState.value = States.HomeContent(isLoading = true)
             try {
                 val categories = getCategoriesUseCase()
+                Log.d("HomeScreen", "Categories: ${categories.size}")
                 val firstCategory = categories.firstOrNull()?.name
                 _uiState.value = States.HomeContent(
                     categories = categories,

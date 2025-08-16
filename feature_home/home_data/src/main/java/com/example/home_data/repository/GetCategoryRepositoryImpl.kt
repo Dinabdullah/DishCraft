@@ -11,7 +11,6 @@ class GetCategoryRepositoryImpl @Inject constructor(
 ) : GetCategoryRepository {
     override suspend fun getCategory(): List<CategoryDomainModel> {
         return mealApi.getCategory()
-            .map { it.toDomain() }
     }
 }
 

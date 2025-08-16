@@ -71,6 +71,9 @@ dependencies {
     implementation(platform(libs.firebase.bom))
     implementation("com.google.firebase:firebase-auth-ktx")
     implementation("com.google.accompanist:accompanist-navigation-animation:0.36.0")
+    implementation("androidx.room:room-runtime:2.6.1")
+    implementation("androidx.room:room-ktx:2.6.1")
+    ksp("androidx.room:room-compiler:2.6.1")
 
 
 }

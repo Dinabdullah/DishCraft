@@ -9,6 +9,6 @@ import javax.inject.Inject
 class GetMealsRepositoryImpl @Inject constructor(private val mealApi: MealRemoteDataSource) :
     GetMealRepository {
     override suspend fun getMeals(category: String): List<MealDomainModel> {
-        return mealApi.getMeals(category).map { it.toDomain() }
+        return mealApi.getMeals(category)
     }
 }

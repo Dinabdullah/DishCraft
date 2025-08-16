@@ -1,6 +1,8 @@
 package com.example.home_data.di
 
 import com.example.core_network.api.MealApi
+import com.example.home_data.local.CategoryDao
+import com.example.home_data.local.meal.MealDao
 import com.example.home_data.remote.category.CategoryRemoteDataSource
 import com.example.home_data.remote.category.CategoryRemoteDataSourceImpl
 import com.example.home_data.remote.meal.MealRemoteDataSource
@@ -17,13 +19,13 @@ object DataSourceModule {
 
     @Provides
     @Singleton
-    fun provideMealRemoteDataSource(api: MealApi): MealRemoteDataSource {
-        return MealRemoteDataSourceImpl(api)
+    fun provideMealRemoteDataSource(api: MealApi,dao: MealDao): MealRemoteDataSource {
+        return MealRemoteDataSourceImpl(api,dao)
     }
 
     @Provides
     @Singleton
-    fun provideCategoryRemoteDataSource(api: MealApi): CategoryRemoteDataSource {
-        return CategoryRemoteDataSourceImpl(api)
+    fun provideCategoryRemoteDataSource(api: MealApi,dao: CategoryDao): CategoryRemoteDataSource {
+        return CategoryRemoteDataSourceImpl(api,dao)
     }
 }
