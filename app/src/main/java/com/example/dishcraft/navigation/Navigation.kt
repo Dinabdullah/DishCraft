@@ -35,12 +35,25 @@ fun AppNavHost() {
             startDestination = Routes.SplashScreen
         ) {
             composable<Routes.SplashScreen> {
-                SplashScreen {
-                    navController.navigate(Routes.OnboardingScreen) {
-                        popUpTo(Routes.SplashScreen) { inclusive = true }
+                SplashScreen(
+                    onNavigateToHome = {
+                        navController.navigate(Routes.Home) {
+                            popUpTo(Routes.SplashScreen) { inclusive = true }
+                        }
+                    },
+                    onNavigateToLogin = {
+                        navController.navigate(Routes.LoginScreen) {
+                            popUpTo(Routes.SplashScreen) { inclusive = true }
+                        }
+                    },
+                    onNavigateToOnboarding = {
+                        navController.navigate(Routes.OnboardingScreen) {
+                            popUpTo(Routes.SplashScreen) { inclusive = true }
+                        }
                     }
-                }
+                )
             }
+
             composable<Routes.Home> {
                 val viewModel: HomeScreenViewModel = hiltViewModel()
                 val state by viewModel.uiState.collectAsState()

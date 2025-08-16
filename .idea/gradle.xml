@@ -41,6 +41,7 @@
             <option value="$PROJECT_DIR$/feature_home/home_data" />
             <option value="$PROJECT_DIR$/feature_home/home_domain" />
             <option value="$PROJECT_DIR$/feature_home/home_ui" />
+            <option value="$PROJECT_DIR$/sharedPreferences" />
           </set>
         </option>
       </GradleProjectSettings>

@@ -37,6 +37,7 @@ fun LoginScreen(
     onSignUpClicked: () -> Unit,
     onHomeClicked: () -> Unit
 ) {
+
     if (states.isSuccess) {
         onHomeClicked()
     }

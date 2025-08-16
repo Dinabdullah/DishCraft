@@ -7,7 +7,6 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
-import com.example.auth_ui.login.LoginScreen
 import com.example.dishcraft.navigation.AppNavHost
 import com.example.dishcraft.ui.theme.DishCraftTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -20,7 +19,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             DishCraftTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { _ ->
-                AppNavHost()
+                    AppNavHost()
                 }
             }
         }
