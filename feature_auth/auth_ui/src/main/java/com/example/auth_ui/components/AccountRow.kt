@@ -24,18 +24,17 @@ fun AccountRow(
     Row(modifier = Modifier.clickable { onActionClick() }) {
         Text(
             text = labelText,
-            fontSize = dimensionResource(id = com.example.core_ui.R.dimen.sp_20).value.sp,
-            fontWeight = FontWeight.SemiBold,
-            fontFamily = FontFamily(Font(R.font.league_spartan_variable)),
-
-            )
-        Text(
-            text = actionText,
-            color = colorResource(com.example.core_ui.R.color.red_pink_main),
             fontWeight = FontWeight.Bold,
             fontFamily = FontFamily(Font(R.font.league_spartan_variable)),
+            fontSize = dimensionResource(id = R.dimen.sp_20).value.sp,
+        )
+        Text(
+            text = actionText,
+            color = colorResource(R.color.red_pink_main),
+            fontWeight = FontWeight.ExtraBold,
+            fontFamily = FontFamily(Font(R.font.league_spartan_variable)),
             textDecoration = TextDecoration.Underline,
-            fontSize = dimensionResource(id = com.example.core_ui.R.dimen.sp_24).value.sp,
+            fontSize = dimensionResource(id = R.dimen.sp_24).value.sp,
         )
     }
 }

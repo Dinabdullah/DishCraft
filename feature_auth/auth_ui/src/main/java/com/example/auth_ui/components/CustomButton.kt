@@ -15,7 +15,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
@@ -34,7 +33,7 @@ fun CustomButton(
 ) {
     Button(
         onClick = onClick,
-        colors = ButtonDefaults.buttonColors(containerColor = colorResource(R.color.red_pink_main)),
+        colors = ButtonDefaults.buttonColors(containerColor = Color.DarkGray),
         shape = RoundedCornerShape(dimensionResource(id = R.dimen.dp_8)),
         modifier = modifier
             .padding(
@@ -55,11 +54,11 @@ fun CustomButton(
         } else {
             Text(
                 text = text,
+                fontWeight = FontWeight.ExtraBold,
                 textAlign = TextAlign.Center,
                 color = Color.White,
-                fontSize = dimensionResource(id = R.dimen.sp_24).value.sp,
                 fontFamily = FontFamily(Font(R.font.league_spartan_variable)),
-                fontWeight = FontWeight.ExtraBold
+                fontSize = dimensionResource(id = R.dimen.sp_20).value.sp,
             )
         }
     }

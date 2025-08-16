@@ -58,6 +58,14 @@ fun OnboardingScreenHorizontal(
     Column(
         modifier = Modifier
             .fillMaxSize()
+            .background(
+                brush = Brush.verticalGradient(
+                    colors = listOf(
+                        Color.LightGray, // top color
+                        colorResource(id = R.color.red_pink_main) // bottom color
+                    )
+                )
+            )
             .padding(dimensionResource(id = R.dimen.dp_16)),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -92,7 +100,7 @@ fun OnboardingScreenHorizontal(
                                 Brush.verticalGradient(
                                     colors = listOf(
                                         Color.Black.copy(alpha = 0.3f),
-                                        colorResource(id = R.color.red_pink_main).copy(alpha = 0.3f)
+                                        Color.DarkGray.copy(alpha = 0.3f)
                                     )
                                 )
                             )
@@ -102,17 +110,17 @@ fun OnboardingScreenHorizontal(
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
                     Text(
                         text = stringResource(id = screen.title),
-                        fontFamily = FontFamily(Font(R.font.league_spartan_variable)),
+                        fontFamily = FontFamily.Cursive,
                         fontWeight = FontWeight.Bold,
                         fontSize = dimensionResource(id = R.dimen.sp_44).value.sp,
-                        color = colorResource(id = R.color.red_pink_main),
-                        style = TextStyle(
-                            shadow = Shadow(
-                                color = Color.Gray,
-                                offset = Offset(4f, 4f),
-                                blurRadius = 8f
-                            )
-                        )
+                        color = Color.DarkGray,
+//                        style = TextStyle(
+//                            shadow = Shadow(
+//                                color = colorResource(id = R.color.red_pink_main),
+//                                offset = Offset(4f, 4f),
+//                                blurRadius = 8f
+//                            )
+//                        )
                     )
                     Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.dp_8)))
                     Text(
@@ -156,10 +164,10 @@ fun OnboardingScreenHorizontal(
             TextButton(onClick = { scope.launch { pagerState.scrollToPage(screens.size - 1) } }) {
                 Text(
                     stringResource(R.string.skip),
-                    color = colorResource(id = R.color.red_pink_main),
-                    fontSize = dimensionResource(id = R.dimen.sp_24).value.sp,
+                    color = Color.DarkGray,
+                    fontWeight = FontWeight.SemiBold,
+                    fontSize = dimensionResource(id = R.dimen.sp_16).value.sp,
                     fontFamily = FontFamily(Font(R.font.league_spartan_variable)),
-                    fontWeight = FontWeight.Bold
                 )
             }
 
@@ -171,12 +179,14 @@ fun OnboardingScreenHorizontal(
                     }
                 },
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = colorResource(id = R.color.red_pink_main),
+                    containerColor = Color.DarkGray,
                     contentColor = Color.White
                 )
             ) {
                 Text(
-                    if (pagerState.currentPage == screens.size - 1) "Get Started" else "Next",
+                    if (pagerState.currentPage == screens.size - 1) stringResource(R.string.get_started) else stringResource(
+                        R.string.next
+                    ),
                     fontFamily = FontFamily(Font(R.font.league_spartan_variable)),
                     fontWeight = FontWeight.Bold
                 )

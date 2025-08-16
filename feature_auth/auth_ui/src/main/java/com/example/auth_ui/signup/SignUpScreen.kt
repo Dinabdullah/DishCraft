@@ -120,7 +120,7 @@ fun SignUpScreen(
 
         states.error?.let {
             Text(
-                text = it.toString(),
+                text = stringResource(id = it),
                 color = Color.Red,
                 fontSize = dimensionResource(id = com.example.core_ui.R.dimen.sp_15).value.sp
             )

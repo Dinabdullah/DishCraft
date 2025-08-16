@@ -9,13 +9,11 @@ import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import com.example.auth_ui.R
 
 @Composable
@@ -43,8 +41,8 @@ fun CustomTextField(
         colors = TextFieldDefaults.colors(
             unfocusedContainerColor = Color.Transparent,
             focusedContainerColor = Color.Transparent,
-            focusedIndicatorColor = colorResource(com.example.core_ui.R.color.red_pink_main),
-            unfocusedIndicatorColor = colorResource(com.example.core_ui.R.color.red_pink_main),
+            focusedIndicatorColor = Color.Black,
+            unfocusedIndicatorColor = Color.LightGray,
             focusedLabelColor = Color.DarkGray,
         )
     )
@@ -57,13 +55,15 @@ fun CustomTextFieldPreview(modifier: Modifier = Modifier) {
         value = "",
         onValueChange = {},
         labelResId = R.string.email,
-        leadingIcon = {  Icon(
-            painter = painterResource(id = R.drawable.email),
-            modifier = Modifier.size(dimensionResource(id = com.example.core_ui.R.dimen.dp_20)),
-            contentDescription = null,
-        )},
+        leadingIcon = {
+            Icon(
+                painter = painterResource(id = R.drawable.email),
+                modifier = Modifier.size(dimensionResource(id = com.example.core_ui.R.dimen.dp_20)),
+                contentDescription = null,
+            )
+        },
         trailingIcon = {},
         visualTransformation = VisualTransformation.None,
 
-    )
+        )
 }

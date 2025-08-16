@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="email">البريد الإلكتروني</string>
+    <string name="password">كلمة المرور</string>
+    <string name="confirm_password">تأكيد كلمة المرور</string>
+    <string name="login">تسجيل الدخول</string>
+    <string name="don_t_have_an_account">ليس لديك حساب؟</string>
+    <string name="sign_up">إنشاء حساب</string>
+    <string name="please_fill_in_all_fields">يرجى ملء جميع الحقول</string>
+    <string name="authentication_failed">فشل تسجيل الدخول</string>
+    <string name="sign_up_">إنشاء حساب</string>
+    <string name="already_have_an_account">هل لديك حساب بالفعل؟</string>
+    <string name="login_">تسجيل الدخول</string>
+    <string name="passwords_do_not_match">كلمتا المرور غير متطابقتين</string>
+</resources>

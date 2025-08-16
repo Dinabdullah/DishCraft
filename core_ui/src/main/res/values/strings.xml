@@ -10,4 +10,6 @@
     <string name="from">From</string>
     <string name="ingredients_to_masterpieces">Ingredients To Masterpieces</string>
     <string name="skip">Skip</string>
+    <string name="get_started">Get Started</string>
+    <string name="next">Next</string>
 </resources>

@@ -31,8 +31,8 @@ fun NoInternet(
 ) {
     Column(
         modifier = Modifier
-            .fillMaxSize(),
-        //.padding(dimensionResource(id = R.dimen.dp_12)),
+            .fillMaxSize()
+            .padding(dimensionResource(id = R.dimen.dp_12)),
         horizontalAlignment = CenterHorizontally,
         verticalArrangement = Arrangement.Center
     )
@@ -44,12 +44,14 @@ fun NoInternet(
         Text(
             stringResource(R.string.ooops_no_internet_connection),
             fontSize = dimensionResource(id = R.dimen.sp_20).value.sp,
-            fontWeight = FontWeight.Bold,
+            fontWeight = FontWeight.ExtraBold,
             fontFamily = FontFamily(Font(R.font.league_spartan_variable)),
         )
         Text(
             stringResource(R.string.please_check_your_internet_connection_and_try_again),
             textAlign = TextAlign.Center,
+            fontWeight = FontWeight.SemiBold,
+            color = Color.DarkGray,
             fontFamily = FontFamily(Font(R.font.league_spartan_variable)),
             fontSize = dimensionResource(id = R.dimen.sp_15).value.sp,
             modifier = Modifier.padding(vertical = dimensionResource(id = R.dimen.dp_12))
@@ -64,10 +66,7 @@ fun NoInternet(
         ) {
             Text(
                 stringResource(R.string.retry),
-                textAlign = TextAlign.Center,
-                fontWeight = FontWeight.Bold,
             )
-
         }
     }
 }

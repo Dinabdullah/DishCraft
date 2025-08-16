@@ -6,10 +6,10 @@
     <string name="login">Login\n</string>
     <string name="don_t_have_an_account">Don\'t have an account?</string>
     <string name="sign_up">Sign Up</string>
-    <string name="please_fill_in_all_fields">Please fill in all fields</string>
-    <string name="authentication_failed">Authentication failed</string>
+    <string name="please_fill_in_all_fields">Please Fill In All Fields</string>
+    <string name="authentication_failed">Authentication Failed</string>
     <string name="sign_up_">Sign Up</string>
-    <string name="already_have_an_account">Already have an account?</string>
+    <string name="already_have_an_account">Already Have An Account?</string>
     <string name="login_">LogIn</string>
     <string name="passwords_do_not_match">Password Donot Match\n</string>
 </resources>
