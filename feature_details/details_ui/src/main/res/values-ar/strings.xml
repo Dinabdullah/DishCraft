@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="meal_details">تفاصيل الوجبة</string>
+    <string name="category">الفئة</string>
+    <string name="area">المنطقة</string>
+    <string name="instructions">طريقة التحضير</string>
+    <string name="ingredients">المكونات</string>
 </resources>
+

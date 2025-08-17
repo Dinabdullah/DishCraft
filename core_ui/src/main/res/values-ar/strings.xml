@@ -1,6 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="ooops_no_internet_connection">عذرًا، لا يوجد اتصال بالإنترنت</string>
-    <string name="please_check_your_internet_connection_and_try_again">يرجى التحقق من اتصال الإنترنت وحاول مرة أخرى</string>
-    <string name="retry">إعادة المحاولة</string>
+    <string name="ooops_no_internet_connection">عذرًا، لا يوجد اتصال بالإنترنت\n</string>
+    <string name="please_check_your_internet_connection_and_try_again">يرجى التحقق من اتصال الإنترنت والمحاولة مرة أخرى</string>
+    <string name="retry">إعادة المحاولة\n</string>
+    <string name="master">خبير</string>
+    <string name="the_art_of_cooking">فن الطهي</string>
+    <string name="craft">حرفة</string>
+    <string name="your_perfect_dish">وجبتك المثالية</string>
+    <string name="from">من</string>
+    <string name="ingredients_to_masterpieces">من المكونات إلى الروائع</string>
+    <string name="skip">تخطي</string>
+    <string name="get_started">ابدأ الآن</string>
+    <string name="next">التالي</string>
+    <string name="settings">الإعدادات</string>
+    <string name="logout">تسجيل الخروج</string>
+    <string name="confirm_logout">تأكيد تسجيل الخروج</string>
+    <string name="are_you_sure_you_want_to_log_out">هل أنت متأكد أنك تريد تسجيل الخروج؟</string>
+    <string name="yes">نعم</string>
+    <string name="cancel">إلغاء</string>
 </resources>
+
+

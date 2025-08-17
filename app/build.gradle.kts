@@ -77,6 +77,5 @@ dependencies {
     ksp("androidx.room:room-compiler:2.6.1")
     implementation("com.airbnb.android:lottie-compose:6.1.0")
     implementation(project(":sharedPreferences"))
-
-
+    implementation(project(":feature_settings"))
 }

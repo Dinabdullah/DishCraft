@@ -10,5 +10,9 @@ sealed class States {
 
 sealed class Events {
     data class FetchMeal(val id: String) : Events()
-    //data class OnYoutubeClick(val url: String) : Events()
+    data class OnYoutubeClick(val url: String) : Events()
+}
+
+sealed class UiEffect {
+    data class OpenYoutube(val url: String) : UiEffect()
 }

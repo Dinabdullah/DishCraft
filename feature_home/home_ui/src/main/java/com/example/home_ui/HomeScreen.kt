@@ -67,20 +67,20 @@ fun SharedTransitionScope.HomeScreen(
                 modifier = Modifier.width(250.dp)
             ) {
                 Text(
-                    text = "Menu",
+                    text = stringResource(R.string.menu),
                     style = MaterialTheme.typography.titleLarge,
                     modifier = Modifier.padding(16.dp)
                 )
-                DrawerItem("Home", icon = painterResource(com.example.core_ui.R.drawable.baseline_home_24)) { scope.launch { drawerState.close() } }
-                DrawerItem("Favorites",icon = painterResource(com.example.core_ui.R.drawable.baseline_favorite_24)) { scope.launch { drawerState.close() } }
-                DrawerItem("Profile",icon = painterResource(com.example.core_ui.R.drawable.baseline_person_24)) { scope.launch { drawerState.close() } }
-                DrawerItem("Settings",icon = painterResource(com.example.core_ui.R.drawable.baseline_settings_24)) {
+                DrawerItem(stringResource(R.string.home), icon = painterResource(com.example.core_ui.R.drawable.baseline_home_24)) { scope.launch { drawerState.close() } }
+                DrawerItem(stringResource(R.string.favorites),icon = painterResource(com.example.core_ui.R.drawable.baseline_favorite_24)) { scope.launch { drawerState.close() } }
+                DrawerItem(stringResource(R.string.profile),icon = painterResource(com.example.core_ui.R.drawable.baseline_person_24)) { scope.launch { drawerState.close() } }
+                DrawerItem(stringResource(R.string.settings),icon = painterResource(com.example.core_ui.R.drawable.baseline_settings_24)) {
                     scope.launch {
                         onNavigateToSetting()
                         drawerState.close()
                     }
                 }
-                DrawerItem("About Us",icon = painterResource(com.example.core_ui.R.drawable.baseline_error_outline_24)) { scope.launch { drawerState.close() } }
+                DrawerItem(stringResource(R.string.about_us),icon = painterResource(com.example.core_ui.R.drawable.baseline_error_outline_24)) { scope.launch { drawerState.close() } }
             }
         }
     ) {

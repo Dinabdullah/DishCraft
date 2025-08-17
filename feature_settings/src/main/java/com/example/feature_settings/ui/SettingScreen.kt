@@ -1,4 +1,4 @@
-package com.example.core_ui.settings
+package com.example.feature_settings.ui
 
 import android.app.Activity
 import androidx.compose.foundation.layout.Arrangement
@@ -12,9 +12,11 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.RadioButton
+import androidx.compose.material3.RadioButtonDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -27,6 +29,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
@@ -36,7 +39,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.example.core_ui.LocaleManager
 import com.example.core_ui.R
-import com.example.sharedpreferences.sharedpreferences.UserPreferences
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -92,6 +94,9 @@ fun SettingScreen(
                 ) {
                     RadioButton(
                         selected = selectedIndex == index,
+                        colors = RadioButtonDefaults.colors(
+                            selectedColor = Color.Black
+                        ),
                         onClick = {
                             selectedIndex = index
                             LocaleManager.setLocale(context, langCodes[index])
@@ -105,26 +110,31 @@ fun SettingScreen(
 
             Spacer(modifier = Modifier.height(30.dp))
 
-            Button(onClick = { showLogoutDialog = true }) {
-                Text("Logout")
+            Button(
+                onClick = { showLogoutDialog = true },
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color.DarkGray
+                )
+            ) {
+                Text(text = stringResource(R.string.logout), color = Color.White)
             }
 
             if (showLogoutDialog) {
                 AlertDialog(
                     onDismissRequest = { showLogoutDialog = false },
-                    title = { Text("Confirm Logout") },
-                    text = { Text("Are you sure you want to log out?") },
+                    title = { Text(stringResource(R.string.confirm_logout)) },
+                    text = { Text(stringResource(R.string.are_you_sure_you_want_to_log_out)) },
                     confirmButton = {
                         TextButton(onClick = {
                             showLogoutDialog = false
                             onLogoutConfirmed()
                         }) {
-                            Text("Yes")
+                            Text(stringResource(R.string.yes))
                         }
                     },
                     dismissButton = {
                         TextButton(onClick = { showLogoutDialog = false }) {
-                            Text("Cancel")
+                            Text(stringResource(R.string.cancel))
                         }
                     }
                 )

@@ -15,6 +15,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -39,7 +40,8 @@ fun SharedTransitionScope.DetailsScreen(
     states: States,
     events: (Events) -> Unit,
     id: String,
-    animatedVisibilityScope: AnimatedVisibilityScope
+    animatedVisibilityScope: AnimatedVisibilityScope,
+    effects: kotlinx.coroutines.flow.SharedFlow<UiEffect>
 ) {
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -60,6 +62,15 @@ fun SharedTransitionScope.DetailsScreen(
             )
         },
     ) { paddings ->
+        val context = LocalContext.current
+        LaunchedEffect(Unit) {
+            effects.collect { effect ->
+                when (effect) {
+                    is UiEffect.OpenYoutube -> context.openYoutubeLink(effect.url)
+                }
+            }
+        }
+
         when (states) {
             States.IsLoading -> {
                 Box(modifier = modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
@@ -94,7 +105,7 @@ fun SharedTransitionScope.DetailsScreen(
                                 title = states.details.name ?: "",
                                 onYoutubeClick = {
                                     states.details.youtube?.let { url ->
-                                       context.openYoutubeLink(url)
+                                        context.openYoutubeLink(url)
                                     }
                                 },
                                 animatedVisibilityScope = animatedVisibilityScope,
@@ -106,24 +117,33 @@ fun SharedTransitionScope.DetailsScreen(
 
                     // Category
                     item {
-                        InfoItem(label = "Category", value = states.details.category)
+                        InfoItem(
+                            label = stringResource(com.example.details_ui.R.string.category),
+                            value = states.details.category
+                        )
                     }
 
                     // Area
                     item {
-                        InfoItem(label = "Area", value = states.details.area)
+                        InfoItem(
+                            label = stringResource(com.example.details_ui.R.string.area),
+                            value = states.details.area
+                        )
                     }
 
                     // Instructions
                     item {
-                        InfoItem(label = "Instructions", value = states.details.instructions)
+                        InfoItem(
+                            label = stringResource(com.example.details_ui.R.string.instructions),
+                            value = states.details.instructions
+                        )
                     }
 
                     // Ingredients + Measures
                     item {
                         Column(modifier = Modifier.padding(dimensionResource(id = R.dimen.dp_16))) {
                             Text(
-                                text = "Ingredients",
+                                text = stringResource(com.example.details_ui.R.string.ingredients),
                                 fontWeight = FontWeight.ExtraBold,
                                 fontSize = dimensionResource(id = R.dimen.dp_24).value.sp,
                                 fontFamily = FontFamily(

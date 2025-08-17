@@ -17,13 +17,12 @@ import com.example.auth_ui.signup.SignUpScreen
 import com.example.auth_ui.signup.SignUpViewModel
 import com.example.core_ui.onboarding.OnboardingComponent
 import com.example.core_ui.onboarding.OnboardingScreenHorizontal
-import com.example.core_ui.onboarding.OnboardingViewModel
-import com.example.core_ui.settings.SettingScreen
-import com.example.core_ui.settings.SettingsViewModel
 import com.example.details_ui.DetailsScreen
 import com.example.details_ui.DetailsScreenViewModel
 import com.example.details_ui.Events
 import com.example.dishcraft.splashscreen.SplashScreen
+import com.example.feature_settings.ui.SettingScreen
+import com.example.feature_settings.ui.SettingsViewModel
 import com.example.home_ui.HomeScreen
 import com.example.home_ui.HomeScreenViewModel
 
@@ -83,7 +82,8 @@ fun AppNavHost() {
                     states = state,
                     events = viewModel::onEvent,
                     id = details.id,
-                    animatedVisibilityScope = this
+                    animatedVisibilityScope = this,
+                    effects = viewModel.effect
                 )
 
             }
@@ -117,8 +117,6 @@ fun AppNavHost() {
                 )
             }
             composable<Routes.OnboardingScreen> {
-                val viewModel: OnboardingViewModel = hiltViewModel()
-                val state by viewModel.currentPage.collectAsState()
                 OnboardingScreenHorizontal(
                     screens = listOf(
                         OnboardingComponent.Screen1,
@@ -129,11 +127,10 @@ fun AppNavHost() {
                         navController.navigate(Routes.LoginScreen)
                     }
                 )
-
             }
             composable<Routes.SettingsScreen> {
-                val viewModel:SettingsViewModel =hiltViewModel()
-                SettingScreen(
+                val viewModel: SettingsViewModel =hiltViewModel()
+               SettingScreen(
                     onLogoutConfirmed = {
                         viewModel.logout()
                         navController.navigate(Routes.LoginScreen) {

@@ -7,7 +7,6 @@ sealed class States {
     data object IsLoading : States()
     data object IsOffline : States()
 
-    //data class CategoryFetched(val list: List<CategoryDomainModel>) : States()
     data class MealFetched(val list: List<MealDomainModel>) : States()
     data class HomeContent(
         val categories: List<CategoryDomainModel> = emptyList(),
@@ -18,15 +17,6 @@ sealed class States {
     ) : States()
 
 }
-
-//sealed class States {
-//    data object IsLoading : States()
-//    data object IsOffline : States()
-//    data class HomeContent(
-//        val categories: List<CategoryDomainModel> = emptyList(),
-//        val meals: List<MealDomainModel> = emptyList()
-//    ) : States()
-//}
 
 sealed class Events {
     data object FetchCategories : Events()

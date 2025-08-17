@@ -114,13 +114,6 @@ fun OnboardingScreenHorizontal(
                         fontWeight = FontWeight.Bold,
                         fontSize = dimensionResource(id = R.dimen.sp_44).value.sp,
                         color = Color.DarkGray,
-//                        style = TextStyle(
-//                            shadow = Shadow(
-//                                color = colorResource(id = R.color.red_pink_main),
-//                                offset = Offset(4f, 4f),
-//                                blurRadius = 8f
-//                            )
-//                        )
                     )
                     Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.dp_8)))
                     Text(
@@ -161,6 +154,7 @@ fun OnboardingScreenHorizontal(
                 .padding(bottom = dimensionResource(id = R.dimen.dp_44)),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
+            //scrollToPage() --> suspend fun
             TextButton(onClick = { scope.launch { pagerState.scrollToPage(screens.size - 1) } }) {
                 Text(
                     stringResource(R.string.skip),

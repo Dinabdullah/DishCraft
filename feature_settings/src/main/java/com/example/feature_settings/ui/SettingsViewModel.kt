@@ -1,4 +1,4 @@
-package com.example.core_ui.settings
+package com.example.feature_settings.ui
 
 import androidx.lifecycle.ViewModel
 import com.example.sharedpreferences.sharedpreferences.UserPreferences
