@@ -2,6 +2,7 @@ package com.example.core_ui.onboarding
 
 import com.example.core_ui.R
 
+//data module
 sealed class OnboardingComponent(val title: Int, val description: Int, val imageRes: Int) {
     data object Screen1 : OnboardingComponent(
         title = R.string.master,

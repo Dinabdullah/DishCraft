@@ -16,13 +16,13 @@ class FavoriteViewModel @Inject constructor(
     private val toggleFavoriteMealUseCase: IToggleFavoriteMealUseCase
 ) : ViewModel() {
 
-    private val _state = MutableStateFlow(States())
-    val state: StateFlow<States> = _state
+    private val _state = MutableStateFlow(StatesFav())
+    val state: StateFlow<StatesFav> = _state
 
-    fun handleIntent(event: Events) {
+    fun handleIntent(event: EventsFav) {
         when (event) {
-            is Events.LoadFavorites -> loadFavorites()
-            is Events.ToggleFavorite -> toggleFavorite(event.mealId, event.isFav)
+            is EventsFav.LoadFavorites -> loadFavorites()
+            is EventsFav.ToggleFavorite -> toggleFavorite(event.mealId, event.isFav)
         }
     }
 

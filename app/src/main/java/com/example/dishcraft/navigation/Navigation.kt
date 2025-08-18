@@ -22,7 +22,7 @@ import com.example.details_ui.DetailsScreen
 import com.example.details_ui.DetailsScreenViewModel
 import com.example.details_ui.Events
 import com.example.dishcraft.splashscreen.SplashScreen
-import com.example.favourite_ui.Events
+import com.example.favourite_ui.EventsFav
 import com.example.favourite_ui.FavoriteScreen
 import com.example.favourite_ui.FavoriteViewModel
 import com.example.feature_settings.ui.SettingScreen
@@ -157,7 +157,7 @@ fun AppNavHost() {
                 val viewModel: FavoriteViewModel = hiltViewModel()
                 val state by viewModel.state.collectAsState()
                 LaunchedEffect(Unit) {
-                    viewModel.handleIntent(Events.LoadFavorites)
+                    viewModel.handleIntent(EventsFav.LoadFavorites)
                 }
                 FavoriteScreen(
                     state = state,
@@ -166,7 +166,7 @@ fun AppNavHost() {
 //                    },
                     onToggleFavorite = { mealId, isFav ->
                         Log.d("HomeScreen", "Toggling favorite for ${mealId} to ${isFav}")
-                        viewModel.handleIntent(Events.ToggleFavorite(mealId, isFav))
+                        viewModel.handleIntent(EventsFav.ToggleFavorite(mealId, isFav))
                     },
                     animatedVisibilityScope = this,
                     onBack = {

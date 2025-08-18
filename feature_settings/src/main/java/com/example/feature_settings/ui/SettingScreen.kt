@@ -50,6 +50,7 @@ fun SettingScreen(
     onBack: () -> Unit
 ) {
     val context = LocalContext.current
+    //change context to activity to be able to make activity.recreate
     val activity = context as Activity
     val languages = listOf("English", "العربية")
     val langCodes = listOf("en", "ar")

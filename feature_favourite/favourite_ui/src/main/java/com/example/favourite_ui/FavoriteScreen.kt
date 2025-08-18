@@ -31,7 +31,7 @@ import com.example.home_ui.R
 @OptIn(ExperimentalSharedTransitionApi::class, ExperimentalMaterial3Api::class)
 @Composable
 fun SharedTransitionScope.FavoriteScreen(
-    state: States,
+    state: StatesFav,
     onToggleFavorite: (String, Boolean) -> Unit,
     onBack: () -> Unit,
     animatedVisibilityScope: AnimatedVisibilityScope
