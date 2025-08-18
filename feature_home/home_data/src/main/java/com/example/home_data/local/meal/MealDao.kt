@@ -16,4 +16,12 @@ interface MealDao {
     @Query("DELETE FROM meals WHERE category = :category")
     suspend fun deleteMealsByCategory(category: String)
 
+    // ✨ جديدة: تجيب كل الفيفوريت
+    @Query("SELECT * FROM meals WHERE isFavorite = 1")
+    suspend fun getFavoriteMeals(): List<MealEntity>
+
+    // ✨ جديدة: تحدث حالة الفيفوريت
+    @Query("UPDATE meals SET isFavorite = :isFav WHERE id = :mealId")
+    suspend fun updateFavorite(mealId: String, isFav: Boolean)
+
 }

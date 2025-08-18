@@ -1,6 +1,7 @@
-package com.example.home_data.local
+package com.example.home_data.local.category
 
 import com.example.core_network.model.Category
+import com.example.home_data.local.category.CategoryEntity
 import com.example.home_domain.CategoryDomainModel
 
 fun Category.toEntity(): CategoryEntity {

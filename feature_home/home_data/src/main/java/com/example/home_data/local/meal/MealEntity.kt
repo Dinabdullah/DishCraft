@@ -8,5 +8,6 @@ data class MealEntity(
     @PrimaryKey val id: String,
     val name: String,
     val thumbnail: String?,
-    val category: String
+    val category: String,
+    val isFavorite: Boolean = false
 )

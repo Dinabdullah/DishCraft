@@ -1,5 +1,6 @@
 package com.example.home_ui
 
+import android.util.Log
 import androidx.compose.animation.AnimatedVisibilityScope
 import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.animation.SharedTransitionScope
@@ -55,8 +56,11 @@ fun SharedTransitionScope.HomeScreen(
     events: (Events) -> Unit,
     onNavigateToDetails: (String) -> Unit,
     onNavigateToSetting: () -> Unit,
+    onToggleFavorite: (String, Boolean) -> Unit,
+    onNavigateToFav: () -> Unit,
     animatedVisibilityScope: AnimatedVisibilityScope
 ) {
+    Log.d("HomeScreen", "HomeScreen Composable entered")
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
     val scope = rememberCoroutineScope()
 
@@ -72,7 +76,10 @@ fun SharedTransitionScope.HomeScreen(
                     modifier = Modifier.padding(16.dp)
                 )
                 DrawerItem(stringResource(R.string.home), icon = painterResource(com.example.core_ui.R.drawable.baseline_home_24)) { scope.launch { drawerState.close() } }
-                DrawerItem(stringResource(R.string.favorites),icon = painterResource(com.example.core_ui.R.drawable.baseline_favorite_24)) { scope.launch { drawerState.close() } }
+                DrawerItem(stringResource(R.string.favorites),icon = painterResource(com.example.core_ui.R.drawable.baseline_favorite_24)) {
+                    scope.launch {
+                        onNavigateToFav()
+                        drawerState.close() } }
                 DrawerItem(stringResource(R.string.profile),icon = painterResource(com.example.core_ui.R.drawable.baseline_person_24)) { scope.launch { drawerState.close() } }
                 DrawerItem(stringResource(R.string.settings),icon = painterResource(com.example.core_ui.R.drawable.baseline_settings_24)) {
                     scope.launch {
@@ -169,14 +176,14 @@ fun SharedTransitionScope.HomeScreen(
                                 MealCard(
                                     imageUrl = state.meals[meal].thumbnail ?: "",
                                     title = state.meals[meal].name ?: "",
-                                    isFavorite = false,
+                                    isFavorite = state.meals[meal].isFavorite,
                                     mealId = state.meals[meal].id ?: "",
                                     onCardClick = {
                                         onNavigateToDetails(
                                             state.meals[meal].id ?: ""
                                         )
                                     },
-                                    onFavoriteClick = { /* Handle favorite */ },
+                                    onFavoriteClick = { onToggleFavorite(state.meals[meal].id ?: "", !state.meals[meal].isFavorite) },
                                     animatedVisibilityScope = animatedVisibilityScope,
                                 )
                             }

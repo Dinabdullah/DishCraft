@@ -21,4 +21,6 @@ sealed class States {
 sealed class Events {
     data object FetchCategories : Events()
     data class FetchMeals(val categoryName: String) : Events()
+    data class ToggleFavorite(val mealId: String, val isFavorite: Boolean) : Events()
+
 }

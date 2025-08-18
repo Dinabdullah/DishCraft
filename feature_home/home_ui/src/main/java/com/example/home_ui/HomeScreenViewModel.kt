@@ -3,6 +3,8 @@ package com.example.home_ui
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.favourite_domain.IToggleFavoriteMealUseCase
+import com.example.favourite_domain.ToggleFavoriteMealUseCaseImpl
 import com.example.home_domain.usecase.categories.IGetCategoriesUseCase
 import com.example.home_domain.usecase.meal.IGetMealsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -14,7 +16,9 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeScreenViewModel @Inject constructor(
     private val getCategoriesUseCase: IGetCategoriesUseCase,
-    private val getMealsUseCase: IGetMealsUseCase
+    private val getMealsUseCase: IGetMealsUseCase,
+    private val toggleFavoriteMealUseCase: IToggleFavoriteMealUseCase
+
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(States.HomeContent(isLoading = true))
@@ -28,6 +32,21 @@ class HomeScreenViewModel @Inject constructor(
         when (event) {
             is Events.FetchCategories -> fetchCategories()
             is Events.FetchMeals -> fetchMeals(event.categoryName)
+            is Events.ToggleFavorite -> {
+                val currentState = _uiState.value
+                val updatedMeals = currentState.meals.map { meal ->
+                    if (meal.id == event.mealId) {
+                        meal.copy(isFavorite = event.isFavorite)
+                    } else meal
+                }
+                _uiState.value = currentState.copy(meals = updatedMeals)
+                //save changes in db
+                viewModelScope.launch {
+                    toggleFavoriteMealUseCase(event.mealId, event.isFavorite)
+                }
+            }
+
+
         }
     }
 
@@ -36,6 +55,7 @@ class HomeScreenViewModel @Inject constructor(
             _uiState.value = States.HomeContent(isLoading = true)
             try {
                 val categories = getCategoriesUseCase()
+                Log.d("HomeScreen", "Categories fetched: ${categories.size}")
                 Log.d("HomeScreen", "Categories: ${categories.size}")
                 val firstCategory = categories.firstOrNull()?.name
                 _uiState.value = States.HomeContent(
@@ -46,6 +66,7 @@ class HomeScreenViewModel @Inject constructor(
                 // جلب وجبات التصنيف الأول تلقائياً
                 firstCategory?.let { fetchMeals(it) }
             } catch (e: Exception) {
+                Log.e("HomeScreen", "fetchCategories failed", e)
                 _uiState.value = States.HomeContent(isOffline = true)
             }
         }

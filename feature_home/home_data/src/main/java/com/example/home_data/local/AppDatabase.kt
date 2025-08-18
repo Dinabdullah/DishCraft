@@ -3,6 +3,8 @@ package com.example.home_data.local
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
+import com.example.home_data.local.category.CategoryDao
+import com.example.home_data.local.category.CategoryEntity
 import com.example.home_data.local.meal.MealDao
 import com.example.home_data.local.meal.MealEntity
 

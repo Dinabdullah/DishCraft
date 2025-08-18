@@ -1,5 +1,6 @@
 package com.example.dishcraft.navigation
 
+import android.util.Log
 import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.animation.SharedTransitionLayout
 import androidx.compose.runtime.Composable
@@ -21,6 +22,9 @@ import com.example.details_ui.DetailsScreen
 import com.example.details_ui.DetailsScreenViewModel
 import com.example.details_ui.Events
 import com.example.dishcraft.splashscreen.SplashScreen
+import com.example.favourite_ui.Events
+import com.example.favourite_ui.FavoriteScreen
+import com.example.favourite_ui.FavoriteViewModel
 import com.example.feature_settings.ui.SettingScreen
 import com.example.feature_settings.ui.SettingsViewModel
 import com.example.home_ui.HomeScreen
@@ -67,7 +71,13 @@ fun AppNavHost() {
                     onNavigateToSetting = {
                         navController.navigate(Routes.SettingsScreen)
                     },
-                    animatedVisibilityScope = this
+                    animatedVisibilityScope = this,
+                    onToggleFavorite = { mealId, isFav ->
+                        viewModel.onEvent(com.example.home_ui.Events.ToggleFavorite(mealId, isFav))
+                    },
+                    onNavigateToFav ={
+                        navController.navigate(Routes.FavouritesScreen)
+                    }
                 )
             }
             composable<Routes.DetailsScreen> { backStackEntry ->
@@ -131,14 +141,41 @@ fun AppNavHost() {
             composable<Routes.SettingsScreen> {
                 val viewModel: SettingsViewModel =hiltViewModel()
                SettingScreen(
-                    onLogoutConfirmed = {
-                        viewModel.logout()
-                        navController.navigate(Routes.LoginScreen) {
-                            popUpTo(Routes.Home) { inclusive = true }
-                        }
+                   onLogoutConfirmed = {
+                       viewModel.logout()
+                       navController.navigate(Routes.LoginScreen) {
+                           popUpTo(Routes.Home) { inclusive = true }
+                       }
+                   },
+                   onBack = {
+                       navController.popBackStack()
+                   }
+               )
+            }
+            composable<Routes.FavouritesScreen> {
+
+                val viewModel: FavoriteViewModel = hiltViewModel()
+                val state by viewModel.state.collectAsState()
+                LaunchedEffect(Unit) {
+                    viewModel.handleIntent(Events.LoadFavorites)
+                }
+                FavoriteScreen(
+                    state = state,
+//                    onNavigateToDetails = { id ->
+//                        navController.navigate(Routes.DetailsScreen(id))
+//                    },
+                    onToggleFavorite = { mealId, isFav ->
+                        Log.d("HomeScreen", "Toggling favorite for ${mealId} to ${isFav}")
+                        viewModel.handleIntent(Events.ToggleFavorite(mealId, isFav))
+                    },
+                    animatedVisibilityScope = this,
+                    onBack = {
+                        navController.popBackStack()
                     }
                 )
+
             }
+
 
         }
     }

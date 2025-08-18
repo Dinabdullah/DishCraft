@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="loading">جاري التحميل...</string>
+    <string name="error">خطأ: %1$s</string>
+    <string name="no_favorites_yet">لا توجد عناصر مفضلة بعد</string>
+</resources>

@@ -24,7 +24,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
@@ -34,7 +33,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
-import coil.request.ImageRequest
 import com.example.core_ui.R
 
 @OptIn(ExperimentalSharedTransitionApi::class)
@@ -59,9 +57,9 @@ fun SharedTransitionScope.MealCard(
     ) {
         Column {
             Box {
-               // val context = LocalContext.current
+                // val context = LocalContext.current
                 AsyncImage(
-                   model = imageUrl,
+                    model = imageUrl,
 //                    model = ImageRequest.Builder(context)
 //                        .data(imageUrl)
 //                        .crossfade(true)
@@ -71,7 +69,7 @@ fun SharedTransitionScope.MealCard(
                     contentDescription = title,
                     modifier = Modifier
                         .sharedElement(
-                            state = rememberSharedContentState(key ="image_$mealId"),
+                            state = rememberSharedContentState(key = "image_$mealId"),
                             animatedVisibilityScope = animatedVisibilityScope,
                         )
                         .fillMaxWidth()
@@ -84,19 +82,26 @@ fun SharedTransitionScope.MealCard(
                         ),
                     placeholder = painterResource(id = R.drawable.placeholder),
                 )
-
+                val color: Color = if (isFavorite) {
+                    colorResource(id = R.color.red_pink_main)
+                } else {
+                    Color.White
+                }
                 IconButton(
                     onClick = onFavoriteClick,
                     modifier = Modifier
                         .align(Alignment.TopEnd)
                         .padding(dimensionResource(id = R.dimen.dp_8))
-                        .background(colorResource(id = R.color.red_pink_main), CircleShape)
+                        .background(
+                            color,
+                            CircleShape
+                        )
                         .size(dimensionResource(id = R.dimen.dp_32))
                 ) {
                     Icon(
                         painter = painterResource(id = R.drawable.heart),
                         contentDescription = "Favorite",
-                        tint = Color.White,
+                       // tint = Color.White,
                         modifier = Modifier.size(dimensionResource(id = R.dimen.dp_24))
                     )
                 }
@@ -112,8 +117,8 @@ fun SharedTransitionScope.MealCard(
                     maxLines = 2,
                     overflow = TextOverflow.Ellipsis,
                     lineHeight = dimensionResource(id = R.dimen.sp_26).value.sp,
-                    modifier = modifier .sharedElement(
-                        state = rememberSharedContentState(key ="title_$mealId"),
+                    modifier = modifier.sharedElement(
+                        state = rememberSharedContentState(key = "title_$mealId"),
                         animatedVisibilityScope = animatedVisibilityScope,
                     )
                 )

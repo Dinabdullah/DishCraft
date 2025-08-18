@@ -1,7 +1,7 @@
 package com.example.home_data.di
 
 import com.example.core_network.api.MealApi
-import com.example.home_data.local.CategoryDao
+import com.example.home_data.local.category.CategoryDao
 import com.example.home_data.local.meal.MealDao
 import com.example.home_data.remote.category.CategoryRemoteDataSource
 import com.example.home_data.remote.category.CategoryRemoteDataSourceImpl

@@ -48,6 +48,8 @@ dependencies {
     api(project(":core_network"))
     implementation(project(":feature_home:home_domain"))
    implementation(project(":feature_home:home_data"))
+    implementation(project(":feature_favourite:favourite_domain"))
+    implementation(project(":feature_favourite:favourite_data"))
 
     implementation(libs.hilt)            
     ksp(libs.hilt.compiler)

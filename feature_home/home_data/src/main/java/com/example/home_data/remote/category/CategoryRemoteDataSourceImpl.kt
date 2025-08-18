@@ -1,10 +1,9 @@
 package com.example.home_data.remote.category
 
 import com.example.core_network.api.MealApi
-import com.example.core_network.model.Category
-import com.example.home_data.local.CategoryDao
-import com.example.home_data.local.toDomain
-import com.example.home_data.local.toEntity
+import com.example.home_data.local.category.CategoryDao
+import com.example.home_data.local.category.toDomain
+import com.example.home_data.local.category.toEntity
 import com.example.home_data.mapper.toDomain
 import com.example.home_domain.CategoryDomainModel
 import javax.inject.Inject
