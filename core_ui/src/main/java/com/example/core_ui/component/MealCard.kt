@@ -31,7 +31,6 @@ import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.example.core_ui.R
@@ -102,7 +101,7 @@ fun SharedTransitionScope.MealCard(
                     Icon(
                         painter = painterResource(id = R.drawable.heart),
                         contentDescription = "Favorite",
-                       // tint = Color.White,
+                        // tint = Color.White,
                         modifier = Modifier.size(dimensionResource(id = R.dimen.dp_24))
                     )
                 }
@@ -130,18 +129,10 @@ fun SharedTransitionScope.MealCard(
 }
 
 
-@OptIn(ExperimentalSharedTransitionApi::class)
-@Preview
-@Composable
-private fun SharedTransitionScope.CategoryBoxdpre() {
-   MealCard(
-       modifier = TODO(),
-       imageUrl = TODO(),
-       title = TODO(),
-       mealId = TODO(),
-       isFavorite = TODO(),
-       onCardClick = TODO(),
-       onFavoriteClick = TODO(),
-       animatedVisibilityScope = TODO()
-   )
-}
+//@OptIn(ExperimentalSharedTransitionApi::class)
+//@Preview
+//@Composable
+//private fun SharedTransitionScope.CategoryBoxdpre() {
+//   MealCard(
+//   )
+//}

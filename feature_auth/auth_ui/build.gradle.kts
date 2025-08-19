@@ -47,6 +47,7 @@ dependencies {
 
     implementation(project(":core_ui"))
     implementation(project(":feature_auth:auth_domain"))
+    implementation(project(":feature_auth:auth_data"))
     implementation(platform(libs.firebase.bom))
     implementation("com.google.firebase:firebase-auth-ktx")
     implementation(libs.hilt)

@@ -1,5 +1,6 @@
-package com.example.favourite_domain
+package com.example.favourite_domain.usecase
 
+import com.example.favourite_domain.repository.FavoriteMealRepository
 import com.example.home_domain.MealDomainModel
 import javax.inject.Inject
 

@@ -1,11 +1,11 @@
 package com.example.favourite_data.di
 
-import com.example.favourite_data.FavoriteMealRepositoryImpl
-import com.example.favourite_domain.FavoriteMealRepository
-import com.example.favourite_domain.GetFavoriteMealsUseCaseImpl
-import com.example.favourite_domain.IGetFavoriteMealsUseCase
-import com.example.favourite_domain.IToggleFavoriteMealUseCase
-import com.example.favourite_domain.ToggleFavoriteMealUseCaseImpl
+import com.example.favourite_data.repository.FavoriteMealRepositoryImpl
+import com.example.favourite_domain.repository.FavoriteMealRepository
+import com.example.favourite_domain.usecase.GetFavoriteMealsUseCaseImpl
+import com.example.favourite_domain.usecase.IGetFavoriteMealsUseCase
+import com.example.favourite_domain.usecase.IToggleFavoriteMealUseCase
+import com.example.favourite_domain.usecase.ToggleFavoriteMealUseCaseImpl
 import com.example.home_data.local.meal.MealDao
 import dagger.Module
 import dagger.Provides

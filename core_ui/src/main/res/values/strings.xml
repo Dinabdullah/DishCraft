@@ -2,7 +2,7 @@
 <resources>
     <string name="ooops_no_internet_connection">Oops No Internet Connection\n</string>
     <string name="please_check_your_internet_connection_and_try_again">Please Check Your Internet Connection And Try Again</string>
-    <string name="retry">Retry\n</string>
+    <string name="retry">Retry</string>
     <string name="master">Master</string>
     <string name="the_art_of_cooking">The Art Of Cooking</string>
     <string name="craft">Craft</string>

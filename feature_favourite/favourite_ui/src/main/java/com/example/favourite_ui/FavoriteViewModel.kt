@@ -2,8 +2,8 @@ package com.example.favourite_ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.favourite_domain.IGetFavoriteMealsUseCase
-import com.example.favourite_domain.IToggleFavoriteMealUseCase
+import com.example.favourite_domain.usecase.IGetFavoriteMealsUseCase
+import com.example.favourite_domain.usecase.IToggleFavoriteMealUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

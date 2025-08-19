@@ -1,4 +1,4 @@
-package com.example.favourite_domain
+package com.example.favourite_domain.repository
 
 import com.example.home_domain.MealDomainModel
 

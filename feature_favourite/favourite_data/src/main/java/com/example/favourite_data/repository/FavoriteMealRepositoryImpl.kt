@@ -1,6 +1,6 @@
-package com.example.favourite_data
+package com.example.favourite_data.repository
 
-import com.example.favourite_domain.FavoriteMealRepository
+import com.example.favourite_domain.repository.FavoriteMealRepository
 import com.example.home_data.local.meal.MealDao
 import com.example.home_data.local.meal.toDomain
 import com.example.home_domain.MealDomainModel

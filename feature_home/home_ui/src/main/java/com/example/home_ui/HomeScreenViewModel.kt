@@ -3,8 +3,7 @@ package com.example.home_ui
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.favourite_domain.IToggleFavoriteMealUseCase
-import com.example.favourite_domain.ToggleFavoriteMealUseCaseImpl
+import com.example.favourite_domain.usecase.IToggleFavoriteMealUseCase
 import com.example.home_domain.usecase.categories.IGetCategoriesUseCase
 import com.example.home_domain.usecase.meal.IGetMealsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel

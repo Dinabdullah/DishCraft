@@ -1,19 +1,20 @@
 package com.example.auth_ui.signup
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.auth_domain.usecase.RegisterUseCase
 import com.example.auth_ui.R
-import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class SignUpViewModel @Inject constructor(
-    private val auth: FirebaseAuth
+    private val registerUseCase: RegisterUseCase
 ) : ViewModel() {
 
-    // UI State
     private val _uiState = MutableStateFlow(SignUpUiState())
     val uiState: StateFlow<SignUpUiState> = _uiState
 
@@ -47,23 +48,20 @@ class SignUpViewModel @Inject constructor(
             return
         }
 
-        _uiState.value = _uiState.value.copy(isLoading = true, error = null)
+        viewModelScope.launch {
+            _uiState.value = _uiState.value.copy(isLoading = true, error = null)
 
-        auth.createUserWithEmailAndPassword(email, password)
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    _uiState.value = _uiState.value.copy(
-                        isLoading = false,
-                        isSuccess = true,
-                        error = null
-                    )
-                } else {
-                    _uiState.value = _uiState.value.copy(
-                        isLoading = false,
-                        error = R.string.authentication_failed
-                    )
+            val result = registerUseCase(email, password)
+
+            _uiState.value = result.fold(
+                onSuccess = {
+                    _uiState.value.copy(isLoading = false, isSuccess = true)
+                },
+                onFailure = {
+                    _uiState.value.copy(isLoading = false, error = R.string.authentication_failed)
                 }
-            }
+            )
+        }
     }
-
 }
+

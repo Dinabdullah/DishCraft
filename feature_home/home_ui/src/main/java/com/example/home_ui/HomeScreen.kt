@@ -3,6 +3,7 @@ package com.example.home_ui
 import android.util.Log
 import androidx.compose.animation.AnimatedVisibilityScope
 import androidx.compose.animation.ExperimentalSharedTransitionApi
+import androidx.compose.animation.SharedTransitionLayout
 import androidx.compose.animation.SharedTransitionScope
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -217,8 +218,10 @@ fun SharedTransitionScope.HomeScreen(
 }
 
 
-@Preview
-@Composable
-private fun HomeScreenPreview() {
-//HomeScreen() { }
-}
+//@Preview
+//@Composable
+//private fun HomeScreenPreview() {
+//    SharedTransitionLayout {
+//
+//    }
+//}

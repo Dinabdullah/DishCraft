@@ -1,6 +1,7 @@
-package com.example.favourite_domain
+package com.example.favourite_domain.usecase
 
 
+import com.example.favourite_domain.repository.FavoriteMealRepository
 import javax.inject.Inject
 
 class ToggleFavoriteMealUseCaseImpl @Inject constructor(
