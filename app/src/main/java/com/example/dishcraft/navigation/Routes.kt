@@ -28,5 +28,9 @@ sealed class Routes {
     @Serializable
     data object SettingsScreen : Routes()
 
+    @Serializable
+    data object AboutUsScreen : Routes()
+
+
 
 }

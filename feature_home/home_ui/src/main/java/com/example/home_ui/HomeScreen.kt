@@ -59,6 +59,7 @@ fun SharedTransitionScope.HomeScreen(
     onNavigateToSetting: () -> Unit,
     onToggleFavorite: (String, Boolean) -> Unit,
     onNavigateToFav: () -> Unit,
+    onNavigateToAboutUs: () -> Unit,
     animatedVisibilityScope: AnimatedVisibilityScope
 ) {
     Log.d("HomeScreen", "HomeScreen Composable entered")
@@ -88,7 +89,13 @@ fun SharedTransitionScope.HomeScreen(
                         drawerState.close()
                     }
                 }
-                DrawerItem(stringResource(R.string.about_us),icon = painterResource(com.example.core_ui.R.drawable.baseline_error_outline_24)) { scope.launch { drawerState.close() } }
+                DrawerItem(stringResource(R.string.about_us),icon = painterResource(com.example.core_ui.R.drawable.baseline_error_outline_24)) {
+                    scope.launch {
+                        onNavigateToAboutUs()
+                        drawerState.close()
+                    }
+                }
+
             }
         }
     ) {
@@ -108,7 +115,12 @@ fun SharedTransitionScope.HomeScreen(
                         )
                     },
                     navigationIcon = {
-                        IconButton(onClick = { scope.launch { drawerState.open() } }) {
+                        IconButton(onClick = {
+                            scope.launch {  if (drawerState.isClosed) {
+                                drawerState.open()
+                            } else {
+                                drawerState.close()
+                            } } }) {
                             Icon(
                                 imageVector = Icons.Default.Menu,
                                 contentDescription = "Menu"

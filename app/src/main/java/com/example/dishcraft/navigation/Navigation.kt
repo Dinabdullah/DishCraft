@@ -16,6 +16,7 @@ import com.example.auth_ui.login.LoginScreen
 import com.example.auth_ui.login.LoginViewModel
 import com.example.auth_ui.signup.SignUpScreen
 import com.example.auth_ui.signup.SignUpViewModel
+import com.example.core_ui.AboutUsScreen
 import com.example.core_ui.onboarding.OnboardingComponent
 import com.example.core_ui.onboarding.OnboardingScreenHorizontal
 import com.example.details_ui.DetailsScreen
@@ -75,8 +76,11 @@ fun AppNavHost() {
                     onToggleFavorite = { mealId, isFav ->
                         viewModel.onEvent(com.example.home_ui.Events.ToggleFavorite(mealId, isFav))
                     },
-                    onNavigateToFav ={
+                    onNavigateToFav = {
                         navController.navigate(Routes.FavouritesScreen)
+                    },
+                    onNavigateToAboutUs = {
+                        navController.navigate(Routes.AboutUsScreen)
                     }
                 )
             }
@@ -93,7 +97,10 @@ fun AppNavHost() {
                     events = viewModel::onEvent,
                     id = details.id,
                     animatedVisibilityScope = this,
-                    effects = viewModel.effect
+                    effects = viewModel.effect,
+                    onBack = {
+                        navController.popBackStack()
+                    }
                 )
 
             }
@@ -174,6 +181,13 @@ fun AppNavHost() {
                     }
                 )
 
+            }
+            composable<Routes.AboutUsScreen> {
+                AboutUsScreen(
+                    onBack = {
+                        navController.popBackStack()
+                    }
+                )
             }
 
 

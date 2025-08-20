@@ -10,6 +10,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -22,6 +24,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
@@ -40,6 +43,7 @@ fun SharedTransitionScope.DetailsScreen(
     states: States,
     events: (Events) -> Unit,
     id: String,
+    onBack: () -> Unit,
     animatedVisibilityScope: AnimatedVisibilityScope,
     effects: kotlinx.coroutines.flow.SharedFlow<UiEffect>
 ) {
@@ -55,6 +59,14 @@ fun SharedTransitionScope.DetailsScreen(
                         ),
                         fontWeight = FontWeight.Bold
                     )
+                },
+                navigationIcon = {
+                    IconButton(onClick = { onBack() }) {
+                        Icon(
+                            painter = painterResource(id = com.example.core_ui.R.drawable.baseline_arrow_back_24),
+                            contentDescription = null
+                        )
+                    }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
                     titleContentColor = colorResource(id = R.color.red_pink_main)

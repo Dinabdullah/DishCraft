@@ -18,4 +18,10 @@
     <string name="are_you_sure_you_want_to_log_out">Are you sure you want to log out?</string>
     <string name="yes">Yes</string>
     <string name="cancel">Cancel</string>
+    <string name="About_us">About Us</string>
+    <string name="dish_craft">DishCraft 🍽️</string>
+    <string name="description">Hi! I\'m Dina Abdullah, an Android developer passionate about creating smooth and user-friendly apps. I love exploring new technologies, crafting beautiful UIs with Jetpack Compose, and learning from every coding challenge. DishCraft is a reflection of my love for both food and clean, modular app architecture.</string>
+    <string name="apiDetails">DishCraft uses TheMealDB API to fetch meal categories, details, and recipe information.</string>
+    <string name="made_with_by_dina_abdullah">Made with ❤️ by Dina Abdullah</string>
+    <string name="api">🌐 API</string>
 </resources>
