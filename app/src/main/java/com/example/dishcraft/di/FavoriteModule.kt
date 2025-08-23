@@ -1,4 +1,4 @@
-package com.example.favourite_data.di
+package com.example.dishcraft.di
 
 import com.example.favourite_data.repository.FavoriteMealRepositoryImpl
 import com.example.favourite_domain.repository.FavoriteMealRepository

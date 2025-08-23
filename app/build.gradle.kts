@@ -65,9 +65,14 @@ dependencies {
 
     implementation(project(":core_ui"))
     implementation(project(":feature_home:home_ui"))
+    implementation(project(":feature_home:home_data"))
+    implementation(project(":feature_home:home_domain"))
     implementation(project(":feature_details:details_ui"))
+    implementation(project(":feature_details:details_data"))
+    implementation(project(":feature_details:details_domain"))
     implementation(project(":feature_auth:auth_ui"))
     implementation(project(":feature_auth:auth_data"))
+    implementation(project(":feature_auth:auth_domain"))
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
     implementation(platform(libs.firebase.bom))
     implementation("com.google.firebase:firebase-auth-ktx")
@@ -75,8 +80,14 @@ dependencies {
     implementation("androidx.room:room-runtime:2.6.1")
     implementation("androidx.room:room-ktx:2.6.1")
     ksp("androidx.room:room-compiler:2.6.1")
-    implementation("com.airbnb.android:lottie-compose:6.1.0")
     implementation(project(":sharedPreferences"))
     implementation(project(":feature_settings"))
     implementation(project(":feature_favourite:favourite_ui"))
+    implementation(project(":feature_favourite:favourite_data"))
+    implementation(project(":feature_favourite:favourite_domain"))
+
+
+    api(libs.retrofit)
+    api(libs.converter.gson)
+
 }

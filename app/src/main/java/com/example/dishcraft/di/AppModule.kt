@@ -1,4 +1,4 @@
-package com.example.core_network.di
+package com.example.dishcraft.di
 
 import com.example.core_network.api.MealApi
 import dagger.Binds

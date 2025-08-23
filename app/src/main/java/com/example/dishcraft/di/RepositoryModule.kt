@@ -1,4 +1,4 @@
-package com.example.home_data.di
+package com.example.dishcraft.di
 
 import com.example.home_data.remote.category.CategoryRemoteDataSource
 import com.example.home_data.remote.meal.MealRemoteDataSource

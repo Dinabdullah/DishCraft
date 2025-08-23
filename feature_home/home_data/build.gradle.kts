@@ -1,7 +1,6 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.hilt)
     alias(libs.plugins.ksp)
 }
 
@@ -45,8 +44,6 @@ dependencies {
 
     implementation(project(":core_network"))
     implementation(project(":feature_home:home_domain"))
-    implementation(libs.hilt)
-    ksp(libs.hilt.compiler)
     implementation("androidx.room:room-runtime:2.6.1")
     implementation("androidx.room:room-ktx:2.6.1")
     ksp("androidx.room:room-compiler:2.6.1")

@@ -1,4 +1,4 @@
-package com.example.details_data.di
+package com.example.dishcraft.di
 
 import com.example.core_network.api.MealApi
 import com.example.details_data.remote.DetailsRemoteDataSource

@@ -1,4 +1,4 @@
-package com.example.dishcraft.splashscreen
+package com.example.core_ui.splashscreen
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
@@ -10,7 +10,7 @@ import com.airbnb.lottie.compose.LottieAnimation
 import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.animateLottieCompositionAsState
 import com.airbnb.lottie.compose.rememberLottieComposition
-import com.example.dishcraft.R
+import com.example.core_ui.R
 import kotlinx.coroutines.delay
 
 @Composable

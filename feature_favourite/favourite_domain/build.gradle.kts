@@ -1,8 +1,6 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.hilt)
-    alias(libs.plugins.ksp)
 }
 
 android {
@@ -44,9 +42,7 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
 
     implementation(project(":feature_home:home_domain"))
-    implementation(project(":core_network"))
-    implementation(libs.hilt)
-    ksp(libs.hilt.compiler)
+    implementation("javax.inject:javax.inject:1")
 
 
 }

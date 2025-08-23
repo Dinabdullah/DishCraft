@@ -1,7 +1,6 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.hilt)
     alias(libs.plugins.ksp)
     id("com.google.gms.google-services")
 
@@ -47,8 +46,6 @@ dependencies {
 
     implementation(project(":core_network"))
     implementation(project(":feature_auth:auth_domain"))
-    implementation(libs.hilt)
-    ksp(libs.hilt.compiler)
     implementation(platform(libs.firebase.bom))
     implementation("com.google.firebase:firebase-auth-ktx")
     implementation("androidx.room:room-runtime:2.6.1")

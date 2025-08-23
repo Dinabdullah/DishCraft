@@ -22,7 +22,7 @@ import com.example.core_ui.onboarding.OnboardingScreenHorizontal
 import com.example.details_ui.DetailsScreen
 import com.example.details_ui.DetailsScreenViewModel
 import com.example.details_ui.Events
-import com.example.dishcraft.splashscreen.SplashScreen
+import com.example.core_ui.splashscreen.SplashScreen
 import com.example.favourite_ui.EventsFav
 import com.example.favourite_ui.FavoriteScreen
 import com.example.favourite_ui.FavoriteViewModel

@@ -1,4 +1,4 @@
-package com.example.auth_ui.di
+package com.example.dishcraft.di
 
 import android.content.SharedPreferences
 import com.example.auth_data.remote.AuthRemoteDataSource

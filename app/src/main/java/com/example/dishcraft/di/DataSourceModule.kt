@@ -1,4 +1,4 @@
-package com.example.home_data.di
+package com.example.dishcraft.di
 
 import com.example.core_network.api.MealApi
 import com.example.home_data.local.category.CategoryDao

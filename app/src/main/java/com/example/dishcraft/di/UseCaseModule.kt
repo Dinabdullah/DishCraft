@@ -1,4 +1,4 @@
-package com.example.home_domain.di
+package com.example.dishcraft.di
 
 import com.example.home_domain.usecase.categories.GetCategoriesUseCaseImpl
 import com.example.home_domain.usecase.categories.IGetCategoriesUseCase
@@ -6,9 +6,9 @@ import com.example.home_domain.usecase.meal.GetMealsUseCaseImpl
 import com.example.home_domain.usecase.meal.IGetMealsUseCase
 import dagger.Binds
 import dagger.Module
-import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -24,4 +24,3 @@ abstract class UseCaseModule {
         impl: GetCategoriesUseCaseImpl
     ): IGetCategoriesUseCase
 }
-

@@ -1,4 +1,4 @@
-package com.example.details_data.di
+package com.example.dishcraft.di
 
 import com.example.details_data.repository.GetDetailsRepositoryImpl
 import com.example.details_domain.repository.GetDetailsRepository

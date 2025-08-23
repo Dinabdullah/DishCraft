@@ -1,7 +1,8 @@
-package com.example.home_data.local
+package com.example.dishcraft.di
 
 import android.content.Context
 import androidx.room.Room
+import com.example.home_data.local.AppDatabase
 import com.example.home_data.local.category.CategoryDao
 import com.example.home_data.local.meal.MealDao
 import dagger.Module

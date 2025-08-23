@@ -1,4 +1,4 @@
-package com.example.details_domain.di
+package com.example.dishcraft.di
 
 import com.example.details_domain.usecase.GetDetailsUseCaseImpl
 import com.example.details_domain.usecase.IGetDetailsUseCase
@@ -9,10 +9,10 @@ import dagger.hilt.components.SingletonComponent
 
 @Module
 @InstallIn(SingletonComponent::class)
-abstract class UseCaseModule {
+abstract class DetailsUseCaseModule {
 
     @Binds
-   abstract fun bindGetDetailsUseCase(
+    abstract fun bindGetDetailsUseCase(
         impl: GetDetailsUseCaseImpl
     ): IGetDetailsUseCase
 
