@@ -18,7 +18,8 @@ fun MealEntity.toDomain(): MealDomainModel {
     return MealDomainModel(
         id = this.id,
         name = this.name,
-        thumbnail = this.thumbnail
+        thumbnail = this.thumbnail,
+        isFavorite = this.isFavorite
     )
 
 }

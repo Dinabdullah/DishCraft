@@ -26,7 +26,12 @@ class HomeScreenViewModel @Inject constructor(
     init {
         fetchCategories()
     }
-
+    fun onResume() {
+        val currentCategory = _uiState.value.selectedCategoryName
+        if (currentCategory != null) {
+            fetchMeals(currentCategory)
+        }
+    }
     fun onEvent(event: Events) {
         when (event) {
             is Events.FetchCategories -> fetchCategories()
@@ -42,6 +47,12 @@ class HomeScreenViewModel @Inject constructor(
                 //save changes in db
                 viewModelScope.launch {
                     toggleFavoriteMealUseCase(event.mealId, event.isFavorite)
+                }
+            }
+            is Events.RefreshCurrentCategory -> {
+                val currentCategory = _uiState.value.selectedCategoryName
+                if (currentCategory != null) {
+                    fetchMeals(currentCategory)
                 }
             }
 
