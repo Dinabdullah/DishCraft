@@ -46,9 +46,22 @@ class FavoriteViewModel @Inject constructor(
     }
 
     private fun toggleFavorite(mealId: String, isFav: Boolean) {
+        val currentState = _state.value
+        val updatedFavorites = if (isFav) {
+            currentState.favorites
+        } else {
+            currentState.favorites.filter { it.id != mealId }
+        }
+
+        _state.value = currentState.copy(favorites = updatedFavorites)
         viewModelScope.launch {
-            toggleFavoriteMealUseCase(mealId, isFav)
-            loadFavorites()
+            try {
+                toggleFavoriteMealUseCase(mealId, isFav)
+                loadFavorites()
+            } catch (e: Exception) {
+                _state.value = currentState
+                _state.value = _state.value.copy(error = e.message)
+            }
         }
     }
 }
